@@ -17,6 +17,10 @@
 
         <!-- Scripts -->
         <script src="{{ mix('js/app.js') }}" defer></script>
+
+        <!-- Alpine.js -->
+        <script defer src="https://unpkg.com/alpinejs@3.7.0/dist/cdn.min.js"></script>
+
     </head>
     <body class="font-sans antialiased">
         <x-jet-banner />
