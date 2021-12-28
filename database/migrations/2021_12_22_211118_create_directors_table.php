@@ -13,8 +13,10 @@ class CreateDirectorsTable extends Migration
      */
     public function up()
     {
+        \Illuminate\Support\Facades\DB::statement('SET SESSION sql_require_primary_key=0');
+
         Schema::create('directors', function (Blueprint $table) {
-            $table->foreignId('user_id')->primary();
+            $table->foreignId('user_id')->unique();
             $table->string('first');
             $table->string('last');
             $table->string('address1');
@@ -40,6 +42,7 @@ class CreateDirectorsTable extends Migration
             $table->unsignedInteger('jhs_student_count')->default(0);
             $table->timestamps();
             $table->softDeletes();
+            $table->primary('user_id');
         });
     }
 
