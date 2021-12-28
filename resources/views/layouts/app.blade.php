@@ -12,6 +12,9 @@
 
         <!-- Styles -->
         <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+        <style>
+            body{font-size: 1.5rem;}
+        </style>
 
         @livewireStyles
 
