@@ -19,7 +19,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg px-4">
                 <form method="post" action="{{ route('administration.import', ['filename' => $filename]) }}" enctype="multipart/form-data"
-                      class="space-y-8 divide-y divide-gray-200"
+                      class="space-y-8 divide-y divide-gray-200 mb-4"
                 >
                     @csrf
 

@@ -78,6 +78,7 @@ class StudentsImport implements ToModel
 
         //director id (user_id)
         $director = Director::where('first', $row[1])->where('last', $row[3])->first();
+        if(! $director){ dd($row);}
         $clean[0] = $director->user_id;
 
         //grade
