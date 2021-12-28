@@ -1,8 +1,6 @@
 <x-guest-layout>
     <x-jet-authentication-card>
-        <x-slot name="logo">
-            <x-jet-authentication-card-logo />
-        </x-slot>
+        <x-slot name="logo"></x-slot>
 
         <x-jet-validation-errors class="mb-4" />
 
@@ -12,7 +10,13 @@
             </div>
         @endif
 
+        <style>img{height:80px;margin: auto;}</style>
+        <div  style="align-self: center;">
+            <img src="images/tmp_nj_map.jpg"  />
+        </div>
+
         <form method="POST" action="{{ route('login') }}">
+
             @csrf
 
             <div>
