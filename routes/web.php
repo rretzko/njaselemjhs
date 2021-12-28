@@ -17,6 +17,37 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
+Route::group(['middleware' => 'auth'],function() {
+
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
+
+    Route::get('/administration', [App\Http\Controllers\Administration\AdministrationController::class, 'index'])
+        ->name('administration.index');
+
+    /** DIRECTORS **/
+    Route::get('/administration/director/{director}', [App\Http\Controllers\Administration\DirectorController::class, 'edit'])
+        ->name('administration.director');
+
+    Route::post('/administration/director/update/{director}', [App\Http\Controllers\Administration\DirectorController::class, 'update'])
+        ->name('administration.director.update');
+
+    Route::get('/administration/directors', [App\Http\Controllers\Administration\DirectorController::class, 'index'])
+        ->name('administration.directors');
+
+    Route::get('/administration/njacda/upload/directors', [App\Http\Controllers\Administration\ImportDirectorsController::class, 'create'])
+        ->name('administration.upload.directors');
+
+    /** DIRECTORS and STUDENTS */
+    Route::post('/administration/njacda/import/{filename}', [App\Http\Controllers\Administration\ImportDirectorsController::class, 'store'])
+        ->name('administration.import');
+
+    /** STUDENTS **/
+    Route::get('/administration/njacda/upload/students', [App\Http\Controllers\Administration\ImportStudentsController::class, 'create'])
+        ->name('administration.upload.students');
+
+    Route::get('/administration/njacda/import/students', [App\Http\Controllers\Administration\ImportStudentsController::class, 'store'])
+        ->name('administration.import.students');
+
+});
