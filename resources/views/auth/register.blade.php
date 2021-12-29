@@ -24,7 +24,12 @@
             <img src="{{asset('assets/images/tmp_nj_map.jpg')}}"  />
         </div>
 
-        <form method="POST" action="{{ route('register') }}">
+            @if(config('app.url') === 'http://njaselemjhs.test')
+                <form method="POST" action="{{ route('register') }}">
+            @else
+                <form method="POST" action="https://njaselemjhs.com/index.php/register" >
+            @endif
+
             @csrf
 
             <div>
