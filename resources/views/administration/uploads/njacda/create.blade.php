@@ -18,7 +18,11 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg px-4">
-                <form method="post" action="{{ route('administration.import', ['filename' => $filename]) }}" enctype="multipart/form-data"
+                @if(config('app.url') === 'http://njaselemjhs.test')
+                    <form method="post" action="{{ route('administration.import', ['filename' => $filename]) }}" enctype="multipart/form-data"
+                @else
+                    <form method="post" action="https://njaselemjhs.com/index.php/administration/njacda/import/directors" enctype="multipart/form-data"
+                @endif
                       class="space-y-8 divide-y divide-gray-200 mb-4"
                 >
                     @csrf

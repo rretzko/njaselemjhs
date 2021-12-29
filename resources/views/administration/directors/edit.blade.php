@@ -30,7 +30,7 @@
                 @if(config('app.url') === 'http://njaselemjhs.test')
                     <form class="space-y-8 divide-y divide-gray-200" method="post" action="{{ route('administration.director.update', ['director' => $director]) }}">
                 @else
-                    <form class="space-y-8 divide-y divide-gray-200" method="post" action="https://njaselemjhs.com/index.php/administration/njacda/import/directors">
+                    <form class="space-y-8 divide-y divide-gray-200" method="post" action="https://njaselemjhs.com/index.php/administration/director/{{ $director->user_id }}">
                 @endif
 
                     @csrf
