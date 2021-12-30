@@ -29,12 +29,14 @@
             <img src="{{asset('assets/images/tmp_nj_map.jpg')}}"  />
         </div>
 
+        <form method="POST" action="{{ route('login') }}">
+        <!-- {{--
         @if(config('app.url') === 'http://njaselemjhs.test')
             <form method="POST" action="{{ route('login') }}">
         @else
-            <form method="POST" action="https://njaselemjhs.com/index.php/login'">
+            <form method="POST" action="https://njaselemjhs.com/index.php/login">
         @endif
-
+        --}} -->
 
             @csrf
 
