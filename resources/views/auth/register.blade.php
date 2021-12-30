@@ -21,7 +21,9 @@
 
         <style>img{height:80px;margin: auto;}</style>
         <div  style="align-self: center;">
-            <img src="{{asset('assets/images/tmp_nj_map.jpg')}}"  />
+            <a href="https://njaselemjhs.com">
+                <img src="{{asset('assets/images/tmp_nj_map.jpg')}}"  />
+            </a>
         </div>
 
             @if(config('app.url') === 'http://njaselemjhs.test')
