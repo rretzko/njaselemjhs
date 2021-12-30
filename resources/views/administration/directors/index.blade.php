@@ -49,7 +49,7 @@
                                     <tbody>
                                     <!-- Odd row -->
                                     @foreach($directors AS $director)
-@if(! $director->user){{ dd($director) }} @endif
+
                                         <tr class="{{ $loop->odd ? 'bg-white' : 'bg-gray-50' }}">
                                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                                                 {{ $loop->iteration }}
