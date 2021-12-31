@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Administration;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\DirectorRequest;
 use App\Models\Director;
 use App\Http\Requests\StoreDirectorRequest;
 use App\Http\Requests\UpdateDirectorRequest;
@@ -34,7 +35,7 @@ class DirectorController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreDirectorRequest  $request
+     * @param \App\Http\Requests\StoreDirectorRequest $request
      * @return \Illuminate\Http\Response
      */
     public function store(StoreDirectorRequest $request)
@@ -71,12 +72,11 @@ class DirectorController extends Controller
      * @param  \App\Models\Director  $director
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateDirectorRequest $request, Director $director)
+    public function update(DirectorRequest $request, Director $director)
     {
         $director->update([
             'first' => $request['first'],
             'last' => $request['last'],
-            //'email' => $request['email'],
             'phone' => $request['phone'],
             'address1' => $request['address1'],
             'address2' => $request['address2'] ?? '',

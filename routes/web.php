@@ -33,6 +33,9 @@ Route::group(['middleware' => 'auth'],function() {
     Route::post('/administration/director/update/{director}', [App\Http\Controllers\Administration\DirectorController::class, 'update'])
         ->name('administration.director.update');
 
+    Route::post('/administration/director/store/{director}', [App\Http\Controllers\Administration\DirectorController::class, 'store'])
+        ->name('administration.director.store');
+
     Route::get('/administration/directors', [App\Http\Controllers\Administration\DirectorController::class, 'index'])
         ->name('administration.directors');
 
@@ -51,3 +54,4 @@ Route::group(['middleware' => 'auth'],function() {
         ->name('administration.import.students');
 
 });
+
