@@ -12,9 +12,21 @@ class Director extends Model
     protected $guarded = [];
     protected $primaryKey = 'user_id';
 
+    public function getFullnameAttribute()
+    {
+        return $this->first.' '.$this->last;
+    }
+
     public function getFullnameAlphaAttribute()
     {
         return $this->last.', '.$this->first;
+    }
+
+    public function students()
+    {
+        return $this->hasMany(Student::class, 'user_id', 'user_id')
+            ->orderBy('last')
+            ->orderBy('first');
     }
 
     public function user()

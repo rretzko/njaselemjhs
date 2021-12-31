@@ -47,6 +47,15 @@ Route::group(['middleware' => 'auth'],function() {
         ->name('administration.import');
 
     /** STUDENTS **/
+    Route::get('/administration/students/{director}', [App\Http\Controllers\Administration\StudentController::class, 'index'])
+        ->name('administration.students');
+
+    Route::get('/administration/students/edit/{student}', [App\Http\Controllers\Administration\StudentController::class, 'edit'])
+        ->name('administration.students.edit');
+
+    Route::get('/administration/students/update/{student}', [App\Http\Controllers\Administration\StudentController::class, 'update'])
+        ->name('administration.students.update');
+
     Route::get('/administration/njacda/upload/students', [App\Http\Controllers\Administration\ImportStudentsController::class, 'create'])
         ->name('administration.upload.students');
 

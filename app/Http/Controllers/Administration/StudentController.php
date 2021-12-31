@@ -1,10 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Administration;
 
+use App\Models\Director;
+use App\Models\Ensemble;
 use App\Models\Student;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreStudentRequest;
 use App\Http\Requests\UpdateStudentRequest;
+use App\Models\Voicepart;
 
 class StudentController extends Controller
 {
@@ -13,9 +17,13 @@ class StudentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Director $director)
     {
-        //
+        return view('administration/students/index',
+            [
+                'director' => $director,
+                'students' => $director->students,
+            ]);
     }
 
     /**
@@ -58,7 +66,13 @@ class StudentController extends Controller
      */
     public function edit(Student $student)
     {
-        //
+        return view('administration/students/edit',
+            [
+                'student' => $student,
+                'ensembles' => Ensemble::orderBy('descr')->get(),
+                'voiceparts' => Voicepart::orderBy('ensemble_id')->orderBy('order_by')->get(),
+                ]
+        );
     }
 
     /**

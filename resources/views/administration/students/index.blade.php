@@ -12,6 +12,10 @@
             <a href="{{ route('administration.index')  }}" class="text-indigo-500">
                 Administration
             </a>
+             -
+            <a href="{{ route('administration.directors')  }}" class="text-indigo-500">
+                Directors
+            </a>
         </div>
     </x-slot>
 
@@ -23,6 +27,9 @@
                     <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                         <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
                             <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+                                <h2 class="py-1">
+                                    Students for: {{ $director->fullname }} @ {{ $director->school }}
+                                </h2>
                                 <table class="min-w-full divide-y divide-gray-200">
                                     <thead class="bg-gray-50">
                                     <tr>
@@ -30,43 +37,41 @@
                                             ###
                                         </th>
                                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                            Name
+                                            Name (Click to edit)
                                         </th>
                                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                            School
+                                            Grade
                                         </th>
                                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                            Email
+                                            Ensemble
                                         </th>
                                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                            Phone
-                                        </th>
-                                        <th scope="col" class="relative px-6 py-3">
-                                            <span class="sr-only">Edit</span>
+                                            Voice Part
                                         </th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     <!-- Odd row -->
-                                    @foreach($directors AS $director)
+                                    @foreach($students AS $student)
                                         <tr class="{{ $loop->odd ? 'bg-white' : 'bg-gray-50' }}">
                                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                                                 {{ $loop->iteration }}
                                             </td>
                                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                                {{ $director->fullnameAlpha }}
+                                                <a href="{{ route('administration.students.edit', ['student' => $student]) }}"
+                                                   class="text-indigo-600 hover:text-indigo-900"
+                                                >
+                                                    {{ $student->fullnameAlpha }}
+                                                </a>
                                             </td>
                                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                                {{ $director->school }}
+                                                {{ $student->grade }}
                                             </td>
                                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                                {{ $director->user->email }}
+                                                {{ $student->ensembleName }}
                                             </td>
-                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                                                {{ $director->phone }}
-                                            </td>
-                                            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                                <a href="{{ route('administration.director',['director' => $director]) }}" class="text-indigo-600 hover:text-indigo-900">Edit</a>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                                {{ $student->voicepartDescr }}
                                             </td>
                                         </tr>
                                     @endforeach
