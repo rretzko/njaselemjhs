@@ -7,7 +7,7 @@ use App\Models\Ensemble;
 use App\Models\Student;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreStudentRequest;
-use App\Http\Requests\UpdateStudentRequest;
+use App\Http\Requests\StudentRequest;
 use App\Models\Voicepart;
 
 class StudentController extends Controller
@@ -78,13 +78,29 @@ class StudentController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateStudentRequest  $request
+     * @param  \App\Http\Requests\StudentRequest  $request
      * @param  \App\Models\Student  $student
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateStudentRequest $request, Student $student)
+    public function update(StudentRequest $request, Student $student)
     {
-        //
+        $student->update(
+            [
+                "first" => $request['first'],
+                "last" => $request['last'],
+                "grade" => $request['grade'],
+                "ensemble_id" => $request['ensemble_id'],
+                "voicepart_id" => $request['voicepart_id'],
+                "guardian_first" => $request['guardian_first'],
+                "guardian_last" => $request['guardian_last'],
+                "guardian_email" => $request['guardian_email'],
+                "guardian_phone1" => $request['guardian_phone1'],
+                "guardian_phone2" => $request['guardian_phone2'],
+                "contract" => $request['contract'],
+            ]
+        );
+
+        return $this->index(Director::find($student->user_id));
     }
 
     /**

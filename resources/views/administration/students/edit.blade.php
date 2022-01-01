@@ -108,9 +108,9 @@
                                             <select name="grade">
                                                 @for($i=1; $i<8; $i++)
                                                     <option value="{{ $i }}"
-                                                        @if($i === $student->grade) SELECTED @endif
+                                                            @if($i === $student->grade) SELECTED @endif
                                                     >
-                                                            {{ $i }}
+                                                        {{ $i }}
                                                     </option>
                                                 @endfor
                                             </select>
@@ -169,19 +169,141 @@
                                 </div>
                             </div>
 
-                            {{-- SUBMIT --}}
-                            <div class="pt-5 mb-4">
-                                <div class="flex justify-end">
-                                    <button type="button"
-                                            class="bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                                        Cancel
-                                    </button>
-                                    <button type="submit"
-                                            class="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                                        Save
-                                    </button>
+                            {{-- FILE UPLOAD --}}
+                            <fieldset class="mt-6">
+                                <legend class="text-base font-medium">
+                                    Uploaded file
+                                </legend>
+                                <div class="sm:col-span-4 mt-1">
+                                    <label for="mp3" class="sr-only block text-sm font-medium text-gray-700">
+                                        .mp3 File Upload
+                                    </label>
+                                    <div class="mt-1">
+                                        <audio controls>
+                                            <source src="{{ $student->mp3 }}" type="audio/mpeg">
+                                            Your browser does not support the audio element
+                                        </audio>
+                                        <span class="text-xs">{{ $student->mp3 }}</span>
+                                        @error('mp3') <div class="text-red-500 text-sm">{{ $message }}</div> @enderror
+                                    </div>
                                 </div>
-                            </div>
+                            </fieldset>
+
+                            {{-- PARENT/GUARDIAN --}}
+                            <fieldset class="mt-6">
+                                <legend class="text-base font-medium">
+                                    Parent/Guardian Information
+                                </legend>
+
+                                {{-- NAMES --}}
+                                <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
+                                    <div id="labels" class="flex row mb-4">
+                                        <div style="">
+                                            <label for="guardian_first" class="block text-sm font-medium text-gray-700">
+                                                First Name
+                                            </label>
+                                            <div style="" class="mt-1">
+                                                <input type="text" name="guardian_first" id="guardian_first" autocomplete=""
+                                                       class="mr-3 @error('guardian_first') border border-gray-300 @enderror"
+                                                       value="{{ $student->guardian_first }}"
+                                                >
+                                                @error('guardian_first')
+                                                <div class="text-red-500 text-sm">{{ $message }}</div> @enderror
+                                            </div>
+                                        </div>
+                                        <div style="">
+                                            <label for="first" class="block text-sm font-medium text-gray-700">
+                                                Last Name
+                                            </label>
+                                            <div style="" class="mt-1">
+                                                <input type="text" name="guardian_last" id="guardian_last" autocomplete=""
+                                                       class="mr-3 @error('guardian_last') border border-gray-300 @enderror"
+                                                       value="{{ $student->guardian_last }}"
+                                                >
+                                                @error('guardian_last')
+                                                <div class="text-red-500 text-sm">{{ $message }}</div> @enderror
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {{-- CONTACTS --}}
+                                <div class="sm:col-span-4 mt-1">
+                                    <label for="guardian_email" class="block text-sm font-medium text-gray-700">
+                                        Email address
+                                    </label>
+                                    <div class="mt-1">
+                                        <input id="guardian_email" name="guardian_email" type="email" autocomplete="email"
+                                               class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md @error('email') border border-gray-300 @enderror"
+                                               value="{{ $student->guardian_email }}"
+                                        >
+                                        @error('guardian_email') <div class="text-red-500 text-sm">{{ $message }}</div> @enderror
+                                    </div>
+                                </div>
+
+                                <div class="sm:col-span-4 mt-1">
+                                    <label for="guardian_phone1" class="block text-sm font-medium text-gray-700">
+                                        Phone 1
+                                    </label>
+                                    <div class="mt-1">
+                                        <input id="guardian_phone1" name="guardian_phone1" type="text" autocomplete="phone"
+                                               class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md @error('phone') border border-gray-300 @enderror"
+                                               value="{{ $student->guardian_phone1 }}"
+                                        >
+                                        @error('guardian_phone1') <div class="text-red-500 text-sm">{{ $message }}</div> @enderror
+                                    </div>
+                                </div>
+
+                                <div class="sm:col-span-4 mt-1">
+                                    <label for="phone2" class="block text-sm font-medium text-gray-700">
+                                        Phone 2
+                                    </label>
+                                    <div class="mt-1">
+                                        <input id="guardian_phone2" name="guardian_phone2" type="text" autocomplete="phone"
+                                               class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md @error('phone') border border-gray-300 @enderror"
+                                               value="{{ $student->guardian_phone2 }}"
+                                        >
+                                        @error('guardian_phone2') <div class="text-red-500 text-sm">{{ $message }}</div> @enderror
+                                    </div>
+                                </div>
+
+                            </fieldset>
+
+                            {{-- CONTRACT --}}
+                            <fieldset class="mt-6">
+                                <legend class="text-base font-medium">
+                                    CONTRACT
+                                </legend>
+                                <div class="sm:col-span-4 mt-1">
+                                    <label for="mp3" class="sr-only block text-sm font-medium text-gray-700">
+                                        Contract has been signed
+                                    </label>
+                                    <div class="mt-1">
+                                        <input type="checkbox" name="contract" id="checkbox" value="1"
+                                               @if($student->contract) CHECKED @endif
+                                        >
+                                        @if($student->contract) The contract has been signed
+                                            @else The contract has not been signed
+                                        @endif
+                                        @error('contract') <div class="text-red-500 text-sm">{{ $message }}</div> @enderror
+                                    </div>
+                                </div>
+                            </fieldset>
+
+
+                                {{-- SUBMIT --}}
+                                <div class="pt-5 mb-4">
+                                    <div class="flex justify-end">
+                                        <button type="button"
+                                                class="bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                            Cancel
+                                        </button>
+                                        <button type="submit"
+                                                class="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                            Save
+                                        </button>
+                                    </div>
+                                </div>
                         </div>
                     </div>
                 </form>
@@ -239,30 +361,7 @@ Grade
 Contacts
 </legend>
 
-<div class="sm:col-span-4 mt-1">
-<label for="email" class="block text-sm font-medium text-gray-700">
-Email address
-</label>
-<div class="mt-1">
-<input id="email" name="email" type="email" autocomplete="email"
-class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md @error('email') border border-gray-300 @enderror"
-value="{{ $director->user->email }}"
->
-@error('email') <div class="text-red-500 text-sm">{{ $message }}</div> @enderror
-</div>
-</div>
 
-<div class="sm:col-span-4 mt-1">
-<label for="phone" class="block text-sm font-medium text-gray-700">
-Phone
-</label>
-<div class="mt-1">
-<input id="phone" name="phone" type="text" autocomplete="phone"
-class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md @error('phone') border border-gray-300 @enderror"
-value="{{ $director->phone }}"
->
-@error('phone') <div class="text-red-500 text-sm">{{ $message }}</div> @enderror
-</div>
 </div>
 </fieldset>
 
