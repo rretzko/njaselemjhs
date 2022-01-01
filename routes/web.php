@@ -46,6 +46,18 @@ Route::group(['middleware' => 'auth'],function() {
     Route::post('/administration/njacda/import/{filename}', [App\Http\Controllers\Administration\ImportDirectorsController::class, 'store'])
         ->name('administration.import');
 
+    /** EVENTS */
+    Route::get('/administration/events', [App\Http\Controllers\Administration\EventController::class, 'index'])
+        ->name('administration.events');
+    Route::get('/administration/events/add', [App\Http\Controllers\Administration\EventController::class, 'create'])
+        ->name('administration.events.create');
+    Route::get('/administration/events/edit/{event}', [App\Http\Controllers\Administration\EventController::class, 'edit'])
+        ->name('administration.events.edit');
+    Route::post('/administration/events/store', [App\Http\Controllers\Administration\EventController::class, 'store'])
+        ->name('administration.events.store');
+    Route::post('/administration/events/update/{event}', [App\Http\Controllers\Administration\EventController::class, 'update'])
+        ->name('administration.events.update');
+
     /** STUDENTS **/
     Route::get('/administration/students/{director}', [App\Http\Controllers\Administration\StudentController::class, 'index'])
         ->name('administration.students');

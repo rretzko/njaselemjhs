@@ -30,6 +30,11 @@
                             Directors
                         </a>
                     </li>
+                    <li>
+                        <a href="{{ route('administration.events') }}">
+                            Events
+                        </a>
+                    </li>
                 </ol>
             </div>
         </div>
