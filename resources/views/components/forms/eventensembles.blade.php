@@ -63,6 +63,11 @@
                                             @if($event->ensembles->contains($ensemble->id)) checked @endif
                                         />
                                         {{ $ensemble->descr }}
+                                        <span class="text-sm">(
+                                        @foreach($ensemble->voiceparts AS $voicepart)
+                                            {{ $voicepart->descr }} @if(! $loop->last), @endif
+                                        @endforeach
+                                        )</span>
                                     </label>
                                 </div>
                             @endforeach

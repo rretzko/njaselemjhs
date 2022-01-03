@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Ensemble extends Model
 {
     use HasFactory;
+
+    public function voiceparts()
+    {
+        return $this->hasMany(Voicepart::class);
+    }
 }
