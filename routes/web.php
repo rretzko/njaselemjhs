@@ -58,6 +58,12 @@ Route::group(['middleware' => 'auth'],function() {
     Route::post('/administration/events/update/{event}', [App\Http\Controllers\Administration\EventController::class, 'update'])
         ->name('administration.events.update');
 
+    /** EVENT ENSEMBLES */
+    Route::get('/administration/events/ensemble/edit/{event}', [App\Http\Controllers\Administration\EventensembleController::class, 'edit'])
+        ->name('administration.events.ensembles.edit');
+    Route::post('/administration/events/ensemble/update/{event}', [App\Http\Controllers\Administration\EventensembleController::class, 'update'])
+        ->name('administration.events.ensembles.update');
+
     /** STUDENTS **/
     Route::get('/administration/students/{director}', [App\Http\Controllers\Administration\StudentController::class, 'index'])
         ->name('administration.students');

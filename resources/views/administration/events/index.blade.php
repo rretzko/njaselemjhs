@@ -48,10 +48,13 @@
                                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                             Dates
                                         </th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            Ensembles
+                                        </th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <!-- Odd row -->
+                                    <!-- Even/Odd rows -->
                                     @foreach($events AS $event)
                                         <tr class="{{ $loop->odd ? 'bg-white' : 'bg-gray-50' }}">
                                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
@@ -70,6 +73,13 @@
                                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                                 {{ $event->start_dateMmmDdYyyy }}<br />
                                                 {{ $event->end_dateMmmDdYyyy }}
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                                <a href="{{ route('administration.events.ensembles.edit', ['event' => $event]) }}">
+                                                    <button class="border border-black p-2 rounded bg-indigo-50 ">
+                                                        Ensembles ({{ $event->ensembles->count() }})
+                                                    </button>
+                                                </a>
                                             </td>
                                         </tr>
                                     @endforeach

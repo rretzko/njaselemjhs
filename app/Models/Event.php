@@ -12,6 +12,11 @@ class Event extends Model
 
     protected $fillable = ['end_date', 'name','short_name','start_date',];
 
+    public function ensembles()
+    {
+        return $this->belongsToMany(Ensemble::class);
+    }
+
     public function getEndDateYyyyMmDdAttribute()
     {
         return substr($this->end_date,0,10);
