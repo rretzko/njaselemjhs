@@ -22,7 +22,7 @@
                 <div class="flex flex-col">
                     <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                         <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-                            <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+                            <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg mb-8">
                                 <div class="flex row justify-between">
                                     <h2 class="py-1">
                                         Events
@@ -45,6 +45,9 @@
                                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                             Short Name
                                         </th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            Dates
+                                        </th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -63,6 +66,10 @@
                                             </td>
                                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                                 {{ $event->short_name }}
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                                {{ $event->start_dateMmmDdYyyy }}<br />
+                                                {{ $event->end_dateMmmDdYyyy }}
                                             </td>
                                         </tr>
                                     @endforeach

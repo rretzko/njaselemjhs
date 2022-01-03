@@ -72,7 +72,7 @@ class EventController extends Controller
      */
     public function edit(Event $event)
     {
-        //
+        return view('administration.events.edit', ['event' => $event]);
     }
 
     /**
@@ -84,7 +84,14 @@ class EventController extends Controller
      */
     public function update(EventRequest $request, Event $event)
     {
-        //
+        $event->update([
+            'name' => $request['name'],
+            'short_name' => $request['short_name'],
+            'start_date' => $request['start_date'],
+            'end_date' => $request['end_date'],
+        ]);
+
+        return view('administration.events.index', ['events' => Event::all()]);
     }
 
     /**
