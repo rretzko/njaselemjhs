@@ -16,11 +16,11 @@ class EventController extends Controller
      */
     public function index()
     {
-
         return view('administration.events.index',
             [
                 'event' => new Event,
-                'events' => Event::all()
+                'events' => Event::all(),
+                'rooms' => \App\Models\Room::all(),
             ]
         );
     }
@@ -91,7 +91,7 @@ class EventController extends Controller
             'end_date' => $request['end_date'],
         ]);
 
-        return view('administration.events.index', ['events' => Event::all()]);
+        return $this->index();
     }
 
     /**

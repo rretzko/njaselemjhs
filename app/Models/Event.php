@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class Event extends Model
 {
@@ -12,9 +13,25 @@ class Event extends Model
 
     protected $fillable = ['end_date', 'name','short_name','start_date',];
 
+    public function adjudicators()
+    {
+        return $this->hasMany(Adjudicator::class)
+            ->where('event_id', $this->id);
+    }
+
     public function ensembles()
     {
         return $this->belongsToMany(Ensemble::class);
+    }
+
+    public function getAdjudicatorCandidatesAttribute()
+    {
+        $userids = Student::where('created_at','>=', $this->start_date)
+            ->where('created_at', '<=', $this->end_date)
+            ->pluck('user_id')
+            ->toArray();
+
+        return Director::find($userids)->sortBy('fullnameAlpha');
     }
 
     public function getEndDateYyyyMmDdAttribute()
@@ -35,5 +52,10 @@ class Event extends Model
     public function getStartDateMmmDdYyyyAttribute()
     {
         return date('M j, Y',strtotime($this->start_date));
+    }
+
+    public function rooms()
+    {
+        return $this->belongsToMany(Room::class);
     }
 }

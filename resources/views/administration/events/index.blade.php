@@ -49,7 +49,7 @@
                                             Dates
                                         </th>
                                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                            Ensembles
+                                            Dashboard
                                         </th>
                                     </tr>
                                     </thead>
@@ -60,7 +60,7 @@
                                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                                                 {{ $loop->iteration }}
                                             </td>
-                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                            <td class="px-6 py-4  text-sm font-medium text-gray-900">
                                                 <a href="{{ route('administration.events.edit', ['event' => $event]) }}"
                                                    class="text-indigo-600 hover:text-indigo-900"
                                                 >
@@ -74,12 +74,29 @@
                                                 {{ $event->start_dateMmmDdYyyy }}<br />
                                                 {{ $event->end_dateMmmDdYyyy }}
                                             </td>
-                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                            <td class="px-6 py-4 text-sm text-gray-500 ">
                                                 <a href="{{ route('administration.events.ensembles.edit', ['event' => $event]) }}">
-                                                    <button class="border border-black p-2 rounded bg-indigo-50 ">
+                                                    <button class="border border-black p-2 rounded bg-indigo-50"
+                                                        style="width: 8rem;"
+                                                    >
                                                         Ensembles ({{ $event->ensembles->count() }})
                                                     </button>
                                                 </a>
+                                                <a href="{{ route('administration.rooms', ['event' => $event]) }}">
+                                                    <button class="border border-black p-2 rounded bg-indigo-50 "
+                                                            style="width: 8rem;"
+                                                    >
+                                                        Rooms ({{ $event->rooms ? $event->rooms->count() : 0 }})
+                                                    </button>
+                                                </a>
+                                                <a href="{{ route('administration.adjudicators', ['event' => $event]) }}">
+                                                    <button class="border border-black p-2 rounded bg-indigo-50"
+                                                            style="width: 8rem;"
+                                                    >
+                                                        Adjudicators ({{ $event->adjudicators ? $event->adjudicators->count() : 0 }})
+                                                    </button>
+                                                </a>
+
                                             </td>
                                         </tr>
                                     @endforeach

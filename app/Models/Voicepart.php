@@ -9,6 +9,11 @@ class Voicepart extends Model
 {
     use HasFactory;
 
+    public function adjudicators()
+    {
+        return $this->hasMany(Adjudicator::class);
+    }
+
     public function ensemble()
     {
         return $this->belongsTo(Ensemble::class);

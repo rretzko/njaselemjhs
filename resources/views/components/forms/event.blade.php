@@ -46,7 +46,7 @@
             <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
                 <div id="labels" class=" mb-4">
                     <div style="">
-                        <label for="first" class="block text-sm font-medium text-gray-700">
+                        <label for="short_name" class="block text-sm font-medium text-gray-700">
                             Short Name
                         </label>
                         <div style="" class="mt-1">
