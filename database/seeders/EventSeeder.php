@@ -13,6 +13,18 @@ class EventSeeder extends Seeder
      */
     public function run()
     {
-        //
+        Event::create([
+            'name' => '2021 Elementary and Junior High School Honors Choir - 28th Annual',
+            'short_name' => '2021 Elem & Jr HS Honors',
+            'start_date' => '2020-02-01 00:00:00',
+            'end_date' => '2021-01-31 23:59:59',
+        ]);
+
+        Event::create([
+            'name' => '2022 Elementary and Junior High School Honors Choir - 29th Annual',
+            'short_name' => '2022 Elem & Jr HS Honors',
+            'start_date' => '2021-02-01 00:00:00',
+            'end_date' => '2022-01-31 23:59:59',
+        ]);
     }
 }
