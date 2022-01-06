@@ -67,6 +67,7 @@
 
 
                     {{-- OLD AUDITIONS --}}
+<!-- {{--
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg px-4">
                 <div>
                     <div class="flex row">
@@ -171,6 +172,7 @@
                     </div>
                 </div>
             </div>
+--}} -->
         </div>
     </div>
 </x-app-layout>
