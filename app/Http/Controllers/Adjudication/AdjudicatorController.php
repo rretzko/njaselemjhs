@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Adjudication;
 
 use App\Http\Controllers\Controller;
 use App\Models\Adjudicator;
+use App\Models\Room;
+use App\Models\Score;
 use App\Models\Student;
 use Illuminate\Http\Request;
 
@@ -16,11 +18,9 @@ class AdjudicatorController extends Controller
      */
     public function index()
     {
-        $adjudicator = Adjudicator::where('user_id', auth()->id())->first();
-
         return view('adjudicators.index',
             [
-                'adjudicator' => $adjudicator,
+                'adjudicator' => Adjudicator::where('user_id', auth()->id())->first(),
             ]
         );
     }
@@ -53,11 +53,15 @@ class AdjudicatorController extends Controller
      * @param  \App\Models\Student $student
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request, Adjudicator $adjudicator, Student $student)
+    public function show(Adjudicator $adjudicator, Student $student)
     {
         return view('adjudicators.show',
             [
                 'adjudicator' => $adjudicator,
+                'adjudicators' => Room::find($adjudicator->room_id)->adjudicators,
+                'adjudicatorscores' => Score::where('student_id', $student->id)
+                    ->where('adjudicator_id', $adjudicator->id)
+                    ->get(),
                 'student' => $student,
             ]);
     }
@@ -77,12 +81,32 @@ class AdjudicatorController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Student
+     * @param  \App\Models\Adjudicator $adjudicator
+     * @param  \App\Models\Student $student
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Student $student)
+    public function update(Request $request, Adjudicator $adjudicator, Student $student)
     {
-        dd($request);
+        $input = $request->validate([
+            'scores' => ['required','array', 'min:5','max:5'],
+            'scores.*' => ['required','numeric','min:1', 'max:9'],
+        ]);
+
+        foreach($input['scores'] AS $key => $score){
+            Score::updateOrCreate(
+                [
+                    'student_id' => $student->id,
+                    'adjudicator_id' => $adjudicator->id,
+                    'ensemble_id' => $adjudicator->ensemble_id,
+                    'scoredefinition_id' => ($key + 1),
+                ],
+                [
+                    'score' => $score,
+                ],
+            );
+        }
+
+        return $this->show($adjudicator,$student);
     }
 
     /**

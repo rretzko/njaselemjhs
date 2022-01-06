@@ -32,7 +32,7 @@ Route::group(['middleware' => 'auth'],
             ->name('adjudication.index');
         Route::get('/adjudication/show/{adjudicator}/{student}', [App\Http\Controllers\Adjudication\AdjudicatorController::class, 'show'])
             ->name('adjudication.show');
-        Route::post('/adjudication/update/{student}', [App\Http\Controllers\Adjudication\AdjudicatorController::class, 'update'])
+        Route::post('/adjudication/update/{adjudicator}/{student}', [App\Http\Controllers\Adjudication\AdjudicatorController::class, 'update'])
             ->name('adjudication.update');
 
         /** DIRECTORS **/

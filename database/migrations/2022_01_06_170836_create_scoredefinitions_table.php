@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateScoresTable extends Migration
+class CreateScoredefinitionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,11 @@ class CreateScoresTable extends Migration
      */
     public function up()
     {
-        Schema::create('scores', function (Blueprint $table) {
+        Schema::create('scoredefinitions', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('student_id')->constrained();
-            $table->foreignId('adjudicator_id')->constrained();
-            $table->tinyInteger('score_id');
-            $table->tinyInteger('score');
+            $table->foreignId('scorecategory_id')->constrained();
+            $table->foreignId('scorecomponent_id')->constrained();
+            $table->tinyInteger('order_by')->default(1);
             $table->timestamps();
         });
     }
@@ -30,6 +29,6 @@ class CreateScoresTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('scores');
+        Schema::dropIfExists('scoredefinitions');
     }
 }

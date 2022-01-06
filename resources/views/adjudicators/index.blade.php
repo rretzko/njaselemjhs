@@ -99,7 +99,7 @@
                             <tbody>
                             @forelse($adjudicator->students() AS $student)
                                 <tr class="{{ $loop->odd ? 'bg-white' : 'bg-gray-50' }}">
-                                    <form method="post" action="{{ route('adjudication.update', ['student' => $student]) }}">
+                                    <form method="post" action="{{ route('adjudication.update', ['adjudicator' => $adjudicator, 'student' => $student]) }}">
                                         @csrf
                                         <td class="px-2 py-2 whitespace-nowrap text-sm font-medium text-gray-900 text-center">{{ $loop->iteration }}</td>
                                         <td class="px-2 py-2 whitespace-nowrap text-sm font-medium text-gray-900 text-center border-l-4">
