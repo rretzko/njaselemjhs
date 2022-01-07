@@ -25,8 +25,8 @@ class ScoredefinitionSeeder extends Seeder
         foreach($seeds AS $seed){
 
             Scoredefinition::create([
-               'scorecategory' => $seed[0],
-               'scorecomponent' => $seed[1],
+               'scorecategory_id' => $seed[0],
+               'scorecomponent_id' => $seed[1],
                'order_by' => $seed[2],
             ]);
         }
