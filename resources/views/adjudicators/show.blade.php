@@ -193,10 +193,14 @@
                                         *****
                                     </td>
                                     <td class="px-2 py-2 whitespace-nowrap text-sm font-medium text-gray-900 border-l-4">
-                                        <button type="submit"
-                                                class="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-500 hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                                            Save
-                                        </button>
+                                        @if($student->user_id === auth()->id())
+                                            My student
+                                        @else
+                                            <button type="submit"
+                                                    class="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-500 hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                                Save
+                                            </button>
+                                        @endif
                                     </td>
                                 </form>
                             </tr>

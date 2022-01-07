@@ -58,6 +58,9 @@ class Student extends Model
 
         $scorescount = $this->scores->count();
 
+        //early exit student's teacher is $this
+        if($this->user_id === auth()->id()){return 'rgba(0,0,0,.3';}
+
         //early exit
         if(! $scorescount){ return 'rgba(0,0,255,.1)';} //indigo-50;
 
