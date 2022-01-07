@@ -26,6 +26,17 @@ class Adjudicator extends Model
         return $this->belongsTo(Event::class);
     }
 
+    /**
+     * Return true if panel to which $this belongs includes $student teacher
+     * @todo add event_id conditional
+     * @param Student $student
+     * @return bool
+     */
+    public function panelHasStudentsTeacher(Student $student)
+    {
+        return $this->room->adjudicators->contains(Adjudicator::where('user_id', $student->user_id)->first());
+    }
+
     public function room()
     {
         return $this->belongsTo(Room::class);

@@ -106,6 +106,11 @@ class AdjudicatorController extends Controller
             );
         }
 
+        if($adjudicator->panelHasStudentsTeacher($student)){
+
+            $student->logAverageScore();
+        }
+
         return $this->show($adjudicator,$student);
     }
 

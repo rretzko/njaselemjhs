@@ -81,6 +81,58 @@ class Student extends Model
         return Score::where('student_id', $this->id)->get();
     }
 
+    /**
+     * For instances where $this teacher is on the adjudication board,
+     * provide an average of the other adjudicators for the teacher's scores
+     */
+    public function logAverageScore()
+    {
+        //total other-adjudication scores
+        $otherscores = 10;
+
+        $scores = $this->scores;
+
+        //student's teacher adjudicator object
+        $teacheradjudicator = Adjudicator::where('user_id', $this->user_id)->first();
+
+        //proceed if the other adjudicators has complete sets of scores logged
+        if($scores->count() >= $otherscores){
+
+            //find one Adjudicator
+            $searchadjudicator = Adjudicator::find($scores[0]->adjudicator_id);
+
+            //array of averaged scores
+            $avgdscores = [];
+            for($i=1;$i<6;$i++) {
+
+                //find the scores for the scoredefinition_id (as $i) other than the student's teacher
+                $scores = Score::where('student_id', $this->id)
+                    ->where('adjudicator_id', '<>', $teacheradjudicator->id)
+                    ->where('scoredefinition_id', $i)
+                    ->pluck('score');
+
+                //average the found scores, rounding down and log the integer value
+                $avgdscores[] = (int)floor((($scores[0] + $scores[1])/$scores->count()));
+            }
+
+            //update the db for the student's teacher with the averaged scores
+            foreach($avgdscores AS $key => $avgdscore){
+
+                Score::updateOrCreate(
+                    [
+                        'student_id' => $this->id,
+                        'adjudicator_id' => $teacheradjudicator->id,
+                        'ensemble_id' => $searchadjudicator->ensemble_id,
+                        'scoredefinition_id' => ($key + 1),
+                    ],
+                    [
+                        'score' => $avgdscore,
+                    ]
+                );
+            }
+        }
+    }
+
     public function scoresByAdjudicator(Adjudicator $adjudicator)
     {
         return Score::where('student_id', $this->id)
