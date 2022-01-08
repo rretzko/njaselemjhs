@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateAdjudicatorRequest extends FormRequest
 {
@@ -13,7 +14,7 @@ class UpdateAdjudicatorRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +25,8 @@ class UpdateAdjudicatorRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'directors' => ['required','min:1','array'],
+            'directors.*' => ['required','numeric',Rule::exists('directors','user_id')],
         ];
     }
 }

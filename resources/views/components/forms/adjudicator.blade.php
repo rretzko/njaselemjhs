@@ -12,7 +12,7 @@
 ])
 
 <form class="space-y-8 divide-y divide-gray-200 px-2" method="post"
-      action="{{ route($route, (($adjudicator) ? ['adjudicator' => $adjudicator] : ['event'=> $event])) }}">
+      action="{{ route($route, ['event'=> $event,'room' => $room]) }}">
 
     @csrf
 
@@ -49,9 +49,9 @@
                             Ensemble
                         </label>
                         <div style="" class="mt-1">
-                            <select name="ensemble_id">
+                            <select name="ensemble_id" @if($room && $room->id) disabled @endif>
                                 @foreach($ensembles AS $selectensemble)
-                                    <option value="{{ $ensemble->id }}"
+                                    <option value="{{ $selectensemble->id }}"
                                         @if($ensemble && $ensemble->id && ($ensemble->id === $selectensemble->id)) selected @endif
                                     >
                                         {{ $selectensemble->descr }}
@@ -73,7 +73,7 @@
                             Room
                         </label>
                         <div style="" class="mt-1">
-                            <select name="room_id">
+                            <select name="room_id" @if($room && $room->id) disabled @endif >
                                 @foreach($rooms AS $selectroom)
                                     <option value="{{ $selectroom->id }}"
                                         @if($room && $room->id && ($room->id === $selectroom->id)) selected @endif
@@ -97,7 +97,7 @@
                             Voice Part(s)
                         </label>
                         <div style="" class="mt-1">
-                            <select name="voiceparts[]" multiple>
+                            <select name="voiceparts[]" multiple @if($room && $room->id) disabled @endif >
                                 @foreach($voiceparts AS $selectvoicepart)
                                     <option value="{{ $selectvoicepart->id }}"
                                         @if($room && $room->id && $room->adjudicators->count() &&

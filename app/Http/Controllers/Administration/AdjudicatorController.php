@@ -62,7 +62,7 @@ class AdjudicatorController extends Controller
 
             foreach($request['voiceparts'] AS $voicepartid){
 
-                $adjudicator = Adjudicator::firstOrCreate([
+                Adjudicator::firstOrCreate([
                     'user_id' => $userid,
                     'event_id' => $event->id,
                     'ensemble_id' => $request['ensemble_id'],
@@ -97,23 +97,21 @@ class AdjudicatorController extends Controller
      */
     public function edit($event_id, int $ensemble_id, int $room_id)
     {
-        $room = Room::find($room_id);
         $event = Event::find($event_id);
-        $ensemble = Ensemble::find($ensemble_id);
 
         $table = new AdjudicatorsTable(['event' => $event]);
 
-        return view('administration.adjudicators.index',
+        return view('administration.adjudicators.edit',
             [
                 'directors' => $event->getAdjudicatorCandidatesAttribute(),
                 'adjudicators' => Adjudicator::all(),
-                'ensemble' => $ensemble,
+                'ensemble' => Ensemble::find($ensemble_id),
                 'ensembles' => Ensemble::all(),
                 'event' => $event,
+                'room' => Room::find($room_id),
                 'rooms' => Room::orderBy('name')->get(),
                 'table' => $table->table,
                 'voiceparts' => Voicepart::orderBy('descr')->get(),
-                'room' => $room,
             ]);
     }
 
@@ -121,12 +119,51 @@ class AdjudicatorController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \App\Http\Requests\UpdateAdjudicatorRequest  $request
-     * @param  \App\Models\Adjudicator  $adjudicator
+     * @param  \App\Models\Event $event
+     * @param  \App\Models\Room $room
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateAdjudicatorRequest $request, Adjudicator $adjudicator)
+    public function update(UpdateAdjudicatorRequest $request, Event $event, Room $room)
     {
-        //
+        /*
+         *  "directors" => array:3 [▼
+        0 => "10"
+        1 => "14"
+        2 => "36"
+        ]
+        */
+
+        $directors = $request['directors'];
+        $adjudicators = $room->adjudicators;
+        $ensembleid = $adjudicators[0]->ensemble_id;
+        $voicepartid = $adjudicators[0]->voicepart_id;
+
+        /* add new Directors */
+        foreach($request['directors'] AS $user_id){
+
+            Adjudicator::updateOrCreate(
+                [
+                    'user_id' => $user_id,
+                    'event_id' => $event->id,
+                    'ensemble_id' => $ensembleid,
+                    'room_id' => $room->id,
+                ],
+                [
+                    'voicepart_id' =>$voicepartid,
+                ]
+            );
+        }
+
+        //delete removed Adjudicators in $room for $event
+        foreach($room->adjudicators AS $adjudicator){
+
+            if(! in_array($adjudicator->user_id, $directors)){
+
+                Adjudicator::destroy($adjudicator->id);
+            }
+        }
+
+        return $this->index($event);
     }
 
     /**

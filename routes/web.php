@@ -76,7 +76,7 @@ Route::group(['middleware' => 'auth'],
             ->name('administration.adjudicators.edit');
         Route::post('/administration/adjudicators/store/{event}', [App\Http\Controllers\Administration\AdjudicatorController::class, 'store'])
             ->name('administration.adjudicators.store');
-        Route::post('/administration/adjudicators/update/{adjudicator}', [App\Http\Controllers\Administration\AdjudicatorController::class, 'update'])
+        Route::post('/administration/adjudicators/update/{event}/{room}', [App\Http\Controllers\Administration\AdjudicatorController::class, 'update'])
             ->name('administration.adjudicators.update');
 
         /** EVENT ENSEMBLES */
