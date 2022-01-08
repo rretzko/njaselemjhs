@@ -34,6 +34,14 @@ class Event extends Model
         return Director::find($userids)->sortBy('fullnameAlpha');
     }
 
+    public static function currentEvent()
+    {
+        return Event::all()->filter(function($event){
+            return (($event->start_date <= now()) && ($event->end_date >= now()));
+        });
+
+    }
+
     public function getEndDateYyyyMmDdAttribute()
     {
         return substr($this->end_date,0,10);

@@ -35,6 +35,11 @@
                             Events
                         </a>
                     </li>
+                    <li>
+                        <a href="{{ route('administration.reports') }}">
+                            Reports
+                        </a>
+                    </li>
                 </ol>
             </div>
         </div>

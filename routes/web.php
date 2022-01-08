@@ -97,6 +97,12 @@ Route::group(['middleware' => 'auth'],
         Route::post('/administration/rooms/update/{event}', [App\Http\Controllers\Administration\RoomController::class, 'update'])
             ->name('administration.rooms.update');
 
+        /** REPORTS */
+        Route::get('/administration/reports', [App\Http\Controllers\Administration\Reports\ReportsController::class, 'index'])
+            ->name('administration.reports');
+        Route::get('/administration/reports/adjudicationbackup', [App\Http\Controllers\Administration\Reports\AdjudicationbackupController::class, 'index'])
+            ->name('administration.reports.adjudicationbackup');
+
         /** STUDENTS **/
         Route::get('/administration/students/{director}', [App\Http\Controllers\Administration\StudentController::class, 'index'])
             ->name('administration.students');
