@@ -16,6 +16,7 @@ class CreateStudentsTable extends Migration
         Schema::create('students', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->comment('id of director');
+            $table->foreignId('event_id')->default(1)->constrained();
             $table->string('first');
             $table->string('last');
             $table->smallInteger('grade');
