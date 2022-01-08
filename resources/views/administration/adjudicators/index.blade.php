@@ -43,8 +43,10 @@
                                         <x-forms.adjudicator
                                             :adjudicators=$adjudicators
                                             :directors=$directors
+                                            :ensemble=$ensemble
                                             :ensembles=$ensembles
                                             :event=$event
+                                            :room=$room
                                             :rooms=$rooms
                                             :voiceparts=$voiceparts
                                             route="administration.adjudicators.store"
@@ -56,63 +58,7 @@
                                     </div>
 
                                 </div>
-                                <!-- {{--
-                                <table class="min-w-full divide-y divide-gray-200">
-                                    <thead class="bg-gray-50">
-                                    <tr>
-                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                            ###
-                                        </th>
-                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                            Include
-                                        </th>
-                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                            Name (Click to edit)
-                                        </th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <form method="post" action="{{ route('administration.rooms.update', ['event' => $event]) }}">
 
-                                        @csrf
-
-                                        <!-- Even/Odd rows -->
-                                        @foreach($rooms AS $room)
-                                            <tr class="{{ $loop->odd ? 'bg-white' : 'bg-gray-50' }}">
-                                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                                    {{ $loop->iteration }}
-                                                </td>
-                                                <td class="px-6 py-4 text-sm font-medium text-gray-900 ">
-                                                    <input type="checkbox" name="rooms[]" id="room_{{ $room->id }}"
-                                                           value="{{ $room->id }}"
-                                                           @if($event->rooms->contains($room)) checked @endif
-                                                    />
-                                                </td>
-                                                <td class="px-6 py-4  text-sm font-medium text-gray-900">
-                                                    <a href="{{ route('administration.rooms.edit', ['room' => $room]) }}"
-                                                       class="text-indigo-600 hover:text-indigo-900"
-                                                    >
-                                                        {{ $room->name }}
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                        @endforeach
-
-                                        <tr>
-                                            <td></td>
-                                            <td colspan="2" >
-                                                <button type="submit"
-                                                        class="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                                                    Save
-                                                </button>
-                                            </td>
-                                        </tr>
-
-                                    </form>
-
-                                    </tbody>
-                                </table>
-                                --}} -->
                             </div>
                         </div>
                     </div>

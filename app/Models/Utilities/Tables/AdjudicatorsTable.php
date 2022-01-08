@@ -73,7 +73,11 @@ class AdjudicatorsTable extends Model
                     }
                 $str .= '</td>';
                 $str .= '<td class="' . $this->tdclass . '">';
-                $str .= 'Edit';
+                    $str .= '<a href="/administration/adjudicators/edit/'.$this->event->id.'/'.$ensemble->id.'/'.$room->id.'">';
+                        $str .= '<button class="bg-indigo-50 border rounded px-2">';
+                            $str .= 'Edit';
+                        $str .= '</button>';
+                    $str .= '</a>';
                 $str .= '</td>';
             $str .= '</tr>';
 

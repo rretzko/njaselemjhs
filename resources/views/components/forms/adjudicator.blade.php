@@ -1,8 +1,10 @@
 @props([
     'adjudicators',
     'directors',
+    'ensemble',
     'ensembles',
     'event',
+    'room',
     'rooms',
     'route',
     'voiceparts',
@@ -22,7 +24,7 @@
                 <div id="labels" class="flex row mb-4">
                     <div>
                         <label for="user_id" class="block text-sm font-medium text-gray-700">
-                            System Id: {{ ($adjudicator) ? $adjudicator->id : 'New' }}
+                            System Id: {{ ($room && $room->id) ? $room->id : 'New' }}
                         </label>
                     </div>
                 </div>
@@ -48,8 +50,12 @@
                         </label>
                         <div style="" class="mt-1">
                             <select name="ensemble_id">
-                                @foreach($ensembles AS $ensemble)
-                                    <option value="{{ $ensemble->id }}">{{ $ensemble->descr }}</option>
+                                @foreach($ensembles AS $selectensemble)
+                                    <option value="{{ $ensemble->id }}"
+                                        @if($ensemble && $ensemble->id && ($ensemble->id === $selectensemble->id)) selected @endif
+                                    >
+                                        {{ $selectensemble->descr }}
+                                    </option>
                                 @endforeach
                             </select>
                             @error('ensemble_id')
@@ -68,8 +74,12 @@
                         </label>
                         <div style="" class="mt-1">
                             <select name="room_id">
-                                @foreach($rooms AS $room)
-                                    <option value="{{ $room->id }}">{{ $room->name }}</option>
+                                @foreach($rooms AS $selectroom)
+                                    <option value="{{ $selectroom->id }}"
+                                        @if($room && $room->id && ($room->id === $selectroom->id)) selected @endif
+                                    >
+                                        {{ $selectroom->name }}
+                                    </option>
                                 @endforeach
                             </select>
                             @error('room_id')
@@ -88,8 +98,15 @@
                         </label>
                         <div style="" class="mt-1">
                             <select name="voiceparts[]" multiple>
-                                @foreach($voiceparts AS $voicepart)
-                                    <option value="{{ $voicepart->id }}">{{ $voicepart->descr }}</option>
+                                @foreach($voiceparts AS $selectvoicepart)
+                                    <option value="{{ $selectvoicepart->id }}"
+                                        @if($room && $room->id && $room->adjudicators->count() &&
+                                            $room->adjudicators[0]->voicepart->id === $selectvoicepart->id)
+                                            selected
+                                        @endif
+                                    >
+                                        {{ $selectvoicepart->descr }}
+                                    </option>
                                 @endforeach
                             </select>
                             @error('voiceparts')
@@ -108,8 +125,15 @@
                         </label>
                         <div style="" class="mt-1">
                             <select name="directors[]" multiple>
-                                @foreach($directors AS $director)
-                                    <option value="{{ $director->user_id }}">{{ $director->fullnameAlpha }}</option>
+                                @foreach($directors AS $selectdirector)
+                                    <option value="{{ $selectdirector->user_id }}"
+                                        @if($room && $room->id &&
+                                            $room->adjudicators->contains('user_id',$selectdirector->user_id))
+                                            selected
+                                        @endif
+                                    >
+                                        {{ $selectdirector->fullnameAlpha }}
+                                    </option>
                                 @endforeach
                             </select>
                             @error('directors')
@@ -128,7 +152,7 @@
                     </button>
                     <button type="submit"
                             class="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                        Save
+                        @if($room && $room->id) Update @else Save @endif
                     </button>
                 </div>
             </div>

@@ -28,8 +28,10 @@ class AdjudicatorController extends Controller
             [
                 'directors' => $event->getAdjudicatorCandidatesAttribute(),
                 'adjudicators' => Adjudicator::all(),
+                'ensemble' => new Ensemble,
                 'ensembles' => Ensemble::all(),
                 'event' => $event,
+                'room' => new Room,
                 'rooms' => Room::orderBy('name')->get(),
                 'table' => $table->table,
                 'voiceparts' => Voicepart::orderBy('descr')->get(),
@@ -88,12 +90,31 @@ class AdjudicatorController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Adjudicator  $adjudicator
+     * @param  integer $event_id
+     * @param  integer $ensemble_id
+     * @param  integer $room_id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Adjudicator $adjudicator)
+    public function edit($event_id, int $ensemble_id, int $room_id)
     {
-        //
+        $room = Room::find($room_id);
+        $event = Event::find($event_id);
+        $ensemble = Ensemble::find($ensemble_id);
+
+        $table = new AdjudicatorsTable(['event' => $event]);
+
+        return view('administration.adjudicators.index',
+            [
+                'directors' => $event->getAdjudicatorCandidatesAttribute(),
+                'adjudicators' => Adjudicator::all(),
+                'ensemble' => $ensemble,
+                'ensembles' => Ensemble::all(),
+                'event' => $event,
+                'rooms' => Room::orderBy('name')->get(),
+                'table' => $table->table,
+                'voiceparts' => Voicepart::orderBy('descr')->get(),
+                'room' => $room,
+            ]);
     }
 
     /**

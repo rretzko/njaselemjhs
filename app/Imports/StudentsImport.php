@@ -3,6 +3,7 @@
 namespace App\Imports;
 
 use App\Models\Director;
+use App\Models\Event;
 use App\Models\Student;
 use App\Models\User;
 use App\Models\Voicepart;
@@ -33,6 +34,9 @@ class StudentsImport implements ToModel
     * 16 => "Student MP3 File"
     * 17 => "Student Contract: I certify that my student and his/her parent has read and agreed to the statement below.  In addition, I understand that as their director I a ▶"
     * ...*
+    * 20 => "Entry Date"
+    * ...*
+    *
     * @return \Illuminate\Database\Eloquent\Model|null
     */
     public function model(array $row)
@@ -64,6 +68,7 @@ class StudentsImport implements ToModel
             'guardian_phone2' => $clean[15] ?? '',
             'mp3' => $clean[16],
             'contract' => $clean[17],
+            'event_id' => $clean[20],
         ]);
     }
 
@@ -78,7 +83,11 @@ class StudentsImport implements ToModel
 
         //director id (user_id)
         $director = Director::where('first', $row[1])->where('last', $row[3])->first();
-        if(! $director){ dd($row);}
+
+        //NJACDA.com rules are that the director does not add their record until all students have been imported
+        //skip students with missing director record
+        if(! $director){ return [];}
+
         $clean[0] = $director->user_id;
 
         //grade
@@ -93,7 +102,28 @@ class StudentsImport implements ToModel
         //contract
         $clean[17] = ($row[17] === 'Yes') ? 1 : 0;
 
+        //event_id
+        $clean[20] = $this->findEvent($row[20]);
+
         return $clean;
+    }
+
+    private function findEvent($date): int
+    {
+        $default = 1;
+
+        //reformat date field 07-01-22 23:19:27 to 2022-01-07
+        $entrydate = '20'.substr($date,6,2).'-'.substr($date,3,2).'-'.substr($date,0,2);
+
+        foreach(Event::all() AS $event)
+        {
+            if(($entrydate >= $event->start_date) && ($entrydate <= $event->end_date)) {
+
+                return $event->id;
+            }
+        }
+
+        return $default;
     }
 
     private function parseVoicepart(string $str) : int

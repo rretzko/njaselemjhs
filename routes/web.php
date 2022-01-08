@@ -72,7 +72,7 @@ Route::group(['middleware' => 'auth'],
             ->name('administration.adjudicators');
         Route::get('/administration/adjudicators/add/{event}', [App\Http\Controllers\Administration\AdjudicatorController::class, 'create'])
             ->name('administration.adjudicators.create');
-        Route::get('/administration/adjudicators/edit/{room}', [App\Http\Controllers\Administration\AdjudicatorController::class, 'edit'])
+        Route::get('/administration/adjudicators/edit/{event}/{ensemble}/{room}', [App\Http\Controllers\Administration\AdjudicatorController::class, 'edit'])
             ->name('administration.adjudicators.edit');
         Route::post('/administration/adjudicators/store/{event}', [App\Http\Controllers\Administration\AdjudicatorController::class, 'store'])
             ->name('administration.adjudicators.store');
