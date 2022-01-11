@@ -96,6 +96,8 @@ class AdjudicatorController extends Controller
             Score::updateOrCreate(
                 [
                     'student_id' => $student->id,
+                    'voicepart_id' =>$student->voicepart_id,
+                    'event_id' => $adjudicator->event_id,
                     'adjudicator_id' => $adjudicator->id,
                     'ensemble_id' => $adjudicator->ensemble_id,
                     'scoredefinition_id' => ($key + 1),
@@ -110,6 +112,8 @@ class AdjudicatorController extends Controller
 
             $student->logAverageScore();
         }
+
+        $student->calcFinalScore();
 
         return $this->show($adjudicator,$student);
     }

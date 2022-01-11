@@ -35,6 +35,16 @@ Route::group(['middleware' => 'auth'],
         Route::post('/adjudication/update/{adjudicator}/{student}', [App\Http\Controllers\Adjudication\AdjudicatorController::class, 'update'])
             ->name('adjudication.update');
 
+        /** CUT-OFFS **/
+        Route::get('/administration/cutoffs', [App\Http\Controllers\Administration\CutoffController::class, 'index'])
+            ->name('administration.cutoffs');
+        Route::get('/administration/cutoffs/{event}', [App\Http\Controllers\Administration\CutoffController::class, 'show'])
+            ->name('administration.cutoffs.show');
+        Route::get('/administration/cutoffs/{event}/{ensemble}', [App\Http\Controllers\Administration\CutoffensembleController::class, 'show'])
+            ->name('administration.cutoffs.ensemble.show');
+        Route::get('/administration/cutoffs/update/{event}/{ensemble}/{voicepart}/{score}', [App\Http\Controllers\Administration\CutoffController::class, 'update'])
+            ->name('administration.cutoffs.ensemble.update');
+
         /** DIRECTORS **/
         Route::get('/administration/director/{director}', [App\Http\Controllers\Administration\DirectorController::class, 'edit'])
             ->name('administration.director');

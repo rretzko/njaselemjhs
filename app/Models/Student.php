@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Utilities\FinalScore;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -20,6 +21,19 @@ class Student extends Model
         }
 
         return $total;
+    }
+
+    public function calcFinalScore()
+    {
+        $fullset = 15;
+        $finalscore = new FinalScore;
+
+        //add or update row if a full set of scores is available
+        if(Score::where('student_id', $this->id)->count() === $fullset){
+
+            $finalscore->updateFinalScore($this, Score::where('student_id', $this->id)->sum('score'));
+        }
+
     }
 
     public function director()
@@ -121,6 +135,8 @@ class Student extends Model
                 Score::updateOrCreate(
                     [
                         'student_id' => $this->id,
+                        'voicepart_id' => $this->voicepart_id,
+                        'event_id' => $teacheradjudicator->event_id,
                         'adjudicator_id' => $teacheradjudicator->id,
                         'ensemble_id' => $searchadjudicator->ensemble_id,
                         'scoredefinition_id' => ($key + 1),

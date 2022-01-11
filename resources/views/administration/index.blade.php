@@ -36,6 +36,11 @@
                         </a>
                     </li>
                     <li>
+                        <a href="{{ route('administration.cutoffs') }}">
+                            Assign Cut-offs
+                        </a>
+                    </li>
+                    <li>
                         <a href="{{ route('administration.reports') }}">
                             Reports
                         </a>
