@@ -16,6 +16,10 @@
             <a href="{{ route('administration.cutoffs')  }}" class="text-indigo-500">
                 Cut-offs
             </a>
+             -
+            <a href="{{ route('administration.cutoffs.show', ['event' => $event])  }}" class="text-indigo-500">
+                {{ $event->short_name }}
+            </a>
         </div>
     </x-slot>
 
