@@ -73,7 +73,9 @@
                 <div>
                     <div class="flex row">
                         <label>Student</label>
-                        <div class="data">{{ $student ? $student->fullnameAlpha : 'No student found'}}</div>
+                        <div class="data">
+                            {{ $student ? $student->fullnameAlpha.' ('.$student->id.')' : 'No student found'}}
+                        </div>
                     </div>
                     <div class="flex row">
                         <label>Grade</label>
