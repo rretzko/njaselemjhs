@@ -35,19 +35,19 @@
                 <th>VP</th>
                 <th>VQ</th>
                 <th>I</th>
-                <th>VQ</th>
-                <th>I</th>
-                <th>M</th>
-                <th>vq</th>
-                <th>i</th>
                 <th>vq</th>
                 <th>i</th>
                 <th>m</th>
                 <th>VQ</th>
                 <th>I</th>
+                <th>vq</th>
+                <th>i</th>
+                <th>m</th>
                 <th>VQ</th>
                 <th>I</th>
-                <th>M</th>
+                <th>vq</th>
+                <th>i</th>
+                <th>m</th>
                 <th>Tot</th>
                 <th>Y/N</th>
             </tr>
