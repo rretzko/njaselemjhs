@@ -15,6 +15,15 @@ class Ensemble extends Model
         return $this->hasMany(Adjudicator::class);
     }
 
+    /**
+     * synonym for descr
+     * @return string
+     */
+    public function getNameAttribute()
+    {
+        return $this->descr;
+    }
+
     public function rooms()
     {
         $rooms = collect();

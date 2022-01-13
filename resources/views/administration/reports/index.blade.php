@@ -20,8 +20,13 @@
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg px-4">
                 <ol>
                     <li>
-                        <a href="{{ route('administration.reports.adjudicationbackup') }}">
+                        <a href="{{ route('administration.reports.adjudicationbackup') }}" class="text-indigo-500">
                             Adjudication Backup pdf
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('administration.reports.scores') }}" class="text-indigo-500">
+                            Scores pdfs
                         </a>
                     </li>
                 </ol>
