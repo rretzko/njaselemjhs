@@ -19,7 +19,7 @@ class EventController extends Controller
         return view('administration.events.index',
             [
                 'event' => new Event,
-                'events' => Event::all(),
+                'events' => Event::orderByDesc('id')->get(),
                 'rooms' => \App\Models\Room::all(),
             ]
         );

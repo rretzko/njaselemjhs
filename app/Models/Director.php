@@ -12,6 +12,26 @@ class Director extends Model
     protected $guarded = [];
     protected $primaryKey = 'user_id';
 
+    public function getCountCurrentStudentsAttribute() : int
+    {
+        $eventid = Event::currentEvent()->first()->id;
+
+        return Student::where('user_id', $this->user_id)
+            ->where('event_id', $eventid)
+            ->count();
+    }
+
+    public function getCurrentStudentsAttribute()
+    {
+        $eventid = Event::currentEvent()->first()->id;
+
+        return Student::where('user_id', $this->user_id)
+            ->where('event_id', $eventid)
+            ->orderBy('last')
+            ->orderBy('first')
+            ->get();
+    }
+
     public function getFullnameAttribute()
     {
         return $this->first.' '.$this->last;

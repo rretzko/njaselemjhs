@@ -22,7 +22,7 @@ class StudentController extends Controller
         return view('administration/students/index',
             [
                 'director' => $director,
-                'students' => $director->students,
+                'students' => $director->currentStudents,
             ]);
     }
 

@@ -19,7 +19,9 @@ class DirectorController extends Controller
     {
         return view('administration.directors.index', ['directors' => Director::orderBy('last')
             ->orderBy('first')
-            ->get()]);
+            ->get()
+            ->sortByDesc('countCurrentStudents')
+        ]);
     }
 
     /**

@@ -48,6 +48,9 @@
                                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                             Voice Part
                                         </th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            Recording
+                                        </th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -72,6 +75,15 @@
                                             </td>
                                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
                                                 {{ $student->voicepartDescr }}
+                                            </td>
+                                            <td>
+                                                <div class="mt-1">
+                                                    <audio controls>
+                                                        <source src="{{ $student->mp3 }}" type="audio/mpeg">
+                                                        Your browser does not support the audio element
+                                                    </audio>
+                                                    @error('mp3') <div class="text-red-500 text-sm">{{ $message }}</div> @enderror
+                                                </div>
                                             </td>
                                         </tr>
                                     @endforeach

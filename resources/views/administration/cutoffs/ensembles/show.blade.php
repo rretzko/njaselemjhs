@@ -50,12 +50,12 @@
                                                             'event' => $event,
                                                             'ensemble' => $ensemble,
                                                             'voicepart' => $voicepart,
-                                                            'score' => $detail->total,
+                                                            'score' => $detail->score,
                                                         ]) }}"
                                                    title="{{ $detail->student_id }}"
-                                                   style="{{ ($cutoffs->where('voicepart_id', $voicepart->id)->first() && ($detail->total <= $cutoffs->where('voicepart_id',$voicepart->id)->first()->score)) ? 'background-color: rgba(0,255,0,.1)' : '' }}"
+                                                   style="{{ ($cutoffs->where('voicepart_id', $voicepart->id)->first() && ($detail->score <= $cutoffs->where('voicepart_id',$voicepart->id)->first()->score)) ? 'background-color: rgba(0,255,0,.1)' : '' }}"
                                                 >
-                                                    {{ $detail->total }}
+                                                    {{ (int)$detail->score }}
                                                 </a>
                                             @endforeach
                                         </div>

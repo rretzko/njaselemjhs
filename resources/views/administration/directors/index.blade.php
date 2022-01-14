@@ -33,7 +33,7 @@
                                             Name (click to edit)
                                         </th>
                                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                            School (click for students)
+                                            School [2022 students] (click for 2022 students)
                                         </th>
                                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                             Email
@@ -59,7 +59,7 @@
                                             </td>
                                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                                 <a href="{{ route('administration.students',['director' => $director]) }}" class="text-indigo-600 hover:text-indigo-900">
-                                                    {{ $director->school }}
+                                                    {{ $director->school }} [{{ $director->countCurrentStudents ?: '-'}}]
                                                 </a>
                                             </td>
                                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
