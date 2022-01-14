@@ -20,9 +20,9 @@ Route::get('/', function () {
 Route::group(['middleware' => 'auth'],
     function () {
 
-        Route::get('/dashboard', function () {
-            return view('dashboard');
-        })->name('dashboard');
+        //Route::get('/dashboard', function () {
+         //   return view('dashboard');
+        //})->name('dashboard');
 
         Route::get('/administration', [App\Http\Controllers\Administration\AdministrationController::class, 'index'])
             ->name('administration.index');
@@ -44,6 +44,10 @@ Route::group(['middleware' => 'auth'],
             ->name('administration.cutoffs.ensemble.show');
         Route::get('/administration/cutoffs/update/{event}/{ensemble}/{voicepart}/{score}', [App\Http\Controllers\Administration\CutoffController::class, 'update'])
             ->name('administration.cutoffs.ensemble.update');
+
+        /** DASHBOARD */
+        Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])
+            ->name('dashboard');
 
         /** DIRECTORS **/
         Route::get('/administration/director/{director}', [App\Http\Controllers\Administration\DirectorController::class, 'edit'])
