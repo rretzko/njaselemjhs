@@ -32,7 +32,7 @@ class ParticipantsExport implements FromCollection, WithHeadings, WithMapping
     public function headings(): array
     {
         return [
-            'id',
+            'participant_id',
             'student_id',
             'last',
             'first',
@@ -48,7 +48,7 @@ class ParticipantsExport implements FromCollection, WithHeadings, WithMapping
             'parent_last',
             'parent_email',
             'parent_phone1',
-            'parent_phone_s',
+            'parent_phone2',
         ];
     }
 
