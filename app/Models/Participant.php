@@ -12,6 +12,20 @@ class Participant extends Model
 
     protected $fillable = ['ensemble_id','event_id','student_id','voicepart_id'];
 
+    public function getFinalScoreAttribute()
+    {
+        return FinalScore::where('student_id', $this->student_id)
+            ->where('event_id', $this->event_id)
+            ->where('ensemble_id', $this->ensemble_id)
+            ->where('voicepart_id', $this->voicepart_id)
+            ->value('score');
+    }
+
+    public function student()
+    {
+        return $this->belongsTo(Student::class);
+    }
+
     public function updateParticipants(Event $event, Ensemble $ensemble, Voicepart $voicepart)
     {
         $event_id = $event->id;
@@ -46,6 +60,10 @@ class Participant extends Model
                 'student_id' => $student_id,
             ]);
         }
+    }
 
+    public function voicepart()
+    {
+        return $this->belongsTo(Voicepart::class);
     }
 }

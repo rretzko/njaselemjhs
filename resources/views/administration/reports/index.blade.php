@@ -29,6 +29,11 @@
                             Scores pdfs
                         </a>
                     </li>
+                    <li>
+                        <a href="{{ route('administration.reports.participants') }}" class="text-indigo-500">
+                            Participant csv files
+                        </a>
+                    </li>
                 </ol>
             </div>
         </div>

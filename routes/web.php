@@ -116,6 +116,13 @@ Route::group(['middleware' => 'auth'],
             ->name('administration.reports');
         Route::get('/administration/reports/adjudicationbackup', [App\Http\Controllers\Administration\Reports\AdjudicationbackupController::class, 'index'])
             ->name('administration.reports.adjudicationbackup');
+
+        Route::get('/administration/reports/participants', [App\Http\Controllers\Administration\Reports\CsvParticipantsController::class, 'index'])
+            ->name('administration.reports.participants');
+        Route::get('/administration/reports/participants/ensemble/{event}/{ensemble}', [App\Http\Controllers\Administration\Reports\CsvParticipantsController::class, 'download'])
+            ->name('administration.reports.participants.ensemble');
+        Route::get('participants/export/', [\App\Http\Controllers\Administration\Reports\CsvParticipantsController::class, 'export']);
+
         Route::get('/administration/reports/scores', [App\Http\Controllers\Administration\Reports\PdfscoresController::class, 'index'])
             ->name('administration.reports.scores');
         Route::get('/administration/reports/scores/ensemble/{event}/{ensemble}', [App\Http\Controllers\Administration\Reports\PdfscoresController::class, 'download'])
