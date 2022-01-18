@@ -76,6 +76,9 @@ class StudentsImport implements ToModel
     {
         $dup = Student::where('mp3', $row[16])->first();
 
+        //update event_id if dup assigned to early load of event 1
+        if($dup && ($dup->event_id === 1)){$dup->event_id = 2; $dup->save();}
+
         //return empty array if is header_row or if duplicate is found
         if($header_row || $dup){ return [];}
 
