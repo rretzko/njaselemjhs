@@ -44,9 +44,11 @@ class Adjudicator extends Model
 
     public function students()
     {
-        return Student::where('voicepart_id', $this->voicepart_id)
+        return Student::where('event_id', Event::currentEvent()->first()->id)
             ->where('ensemble_id', $this->ensemble_id)
-            ->get();
+            ->whereIn('voicepart_id', $this->voiceparts())
+            ->get()
+            ->sortBy('voicepart_id');
     }
 
     public function user()
@@ -57,6 +59,19 @@ class Adjudicator extends Model
     public function voicepart()
     {
         return $this->belongsTo(Voicepart::class);
+    }
+
+    /*
+     * An adjudicator can be assigned to multiple voiceparts
+     */
+    private function voiceparts()
+    {
+        return (Adjudicator::where('user_id', $this->user_id)
+            ->where('room_id', $this->room_id)
+            ->where('event_id', $this->event_id)
+            ->where('ensemble_id', $this->ensemble_id)
+            ->pluck('voicepart_id')
+            ->toArray());
     }
 
 }
