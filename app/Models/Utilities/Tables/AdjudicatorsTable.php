@@ -69,7 +69,7 @@ class AdjudicatorsTable extends Model
                 $str .= '</td>';
                 $str .= '<td class="' . $this->tdclass . '">';
                     foreach ($room->adjudicators->sortBy('director.last') as $adjudicator){
-                        $str .= $adjudicator->director->fullnameAlpha.'<br />';
+                        $str .= $adjudicator->director->fullnameAlpha.' ('.$adjudicator->voicepart->abbr.')'.'<br />';
                     }
                 $str .= '</td>';
                 $str .= '<td class="' . $this->tdclass . '">';
