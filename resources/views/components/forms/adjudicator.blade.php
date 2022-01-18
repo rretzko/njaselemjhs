@@ -132,7 +132,7 @@
                                             selected
                                         @endif
                                     >
-                                        {{ $selectdirector->fullnameAlpha }}
+                                        {{ $selectdirector->fullnameAlpha.' ('.$selectdirector->hasStudentsIn.')' }}
                                     </option>
                                 @endforeach
                             </select>

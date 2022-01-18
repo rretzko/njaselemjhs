@@ -42,6 +42,37 @@ class Director extends Model
         return $this->last.', '.$this->first;
     }
 
+    /**
+     * Return first intial of ensembles in which $this
+     * has students auditioning
+     * i.e. E, J, or E/J
+     * @return string
+     */
+    public function getHasStudentsInAttribute(): string
+    {
+        $elementary = Student::where('user_id', $this->user_id)
+            ->where('event_id', Event::currentEvent()->first()->id)
+            ->where('ensemble_id', 1)
+            ->count();
+
+        $jhs = Student::where('user_id', $this->user_id)
+            ->where('event_id', Event::currentEvent()->first()->id)
+            ->where('ensemble_id', 2)
+            ->count();
+
+        if ($elementary && $jhs) {
+            $has = 'E/J';
+        } elseif ($elementary) {
+            $has = 'E';
+        }elseif($jhs){
+            $has = 'J';
+        }else{
+            $has = '-';
+        }
+
+        return $has;
+    }
+
     public function students()
     {
         return $this->hasMany(Student::class, 'user_id', 'user_id')
