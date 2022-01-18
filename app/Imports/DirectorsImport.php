@@ -77,11 +77,11 @@ class DirectorsImport implements ToModel
             'scity' => $clean[15],
             'sstate_abbr' => $clean[16] ?? 'NJ',
             'spostal_code' => $clean[17],
-            'judging_day' => $clean[18] ?? '',
-            'rehearsal_day' => $clean[19] ?? '',
-            'festival_day' => $clean[20] ?? '',
-            'elem_student_count' => $clean[21] ?? 0,
-            'jhs_student_count' => ($clean[22] === 'N/A') ? 0 : ($clean[22] === '' ? 0 : $clean[22]),
+            'judging_day' => strlen($clean[19]) ? 1 : 0,
+            'rehearsal_day' => strlen($clean[20]) ? 1 : 0,
+            'festival_day' => strlen($clean[21]) ? 1 : 0,
+            'elem_student_count' => $clean[22] ?? 0,
+            'jhs_student_count' => ($clean[23] === 'N/A') ? 0 : ($clean[23] === '' ? 0 : $clean[23]),
         ]);
     }
 
