@@ -33,14 +33,8 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg px-4">
-            <!-- {{--
-                @if(config('app.url') === 'http://njaselemjhs.test')
-                    <form class="space-y-8 divide-y divide-gray-200" method="post" action="{{ route('administration.director.update', ['director' => $director]) }}">
-                @else
-                    <form class="space-y-8 divide-y divide-gray-200" method="post" action="https://njaselemjhs.com/index.php/administration/director/{{ $director->user_id }}">
-                @endif
---}} -->
-                <form class="space-y-8 divide-y divide-gray-200" method="post"
+
+                <form class="space-y-8 divide-y divide-gray-200 mb-6" method="post"
                       action="{{ route('administration.director.update', ['director' => $director]) }}">
 
                     @csrf
@@ -344,6 +338,55 @@
 
                         <fieldset class="mt-6">
                             <legend class="text-base font-medium">
+                                Availability
+                            </legend>
+                            <div class="sm:col-span-2 mt-1">
+                                <div class="mt-1 flex row ">
+                                    <input type="checkbox" name="judging_day" id="judging_day" autocomplete=""
+                                           class="mr-2 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block sm:text-sm border-gray-300 rounded-md @error('judging_dat') border border-gray-300 @enderror"
+                                           value="{{ $director->judging_day }}"
+                                           @if($director->judging_day) checked @endif
+                                    >
+                                    @error('judging_day')
+                                    <div class="text-red-500 text-sm">{{ $message }}</div> @enderror
+
+                                    <label for="judging_day" class="block text-sm font-medium text-gray-700">
+                                        Judging Day
+                                    </label>
+                                </div>
+
+                                <div class="mt-1 flex row ">
+                                    <input type="checkbox" name="rehearsal_day" id="rehearsal_day" autocomplete=""
+                                           class="mr-2 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block sm:text-sm border-gray-300 rounded-md @error('judging_dat') border border-gray-300 @enderror"
+                                           value="{{ $director->rehearsal_day }}"
+                                           @if($director->rehearsal_day) checked @endif
+                                    >
+                                    @error('rehearsal_day')
+                                    <div class="text-red-500 text-sm">{{ $message }}</div> @enderror
+
+                                    <label for="rehearsal_day" class="block text-sm font-medium text-gray-700">
+                                        Rehearsal Day
+                                    </label>
+                                </div>
+
+                                <div class="mt-1 flex row ">
+                                    <input type="checkbox" name="festival_day" id=festivall_day" autocomplete=""
+                                           class="mr-2 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block sm:text-sm border-gray-300 rounded-md @error('judging_dat') border border-gray-300 @enderror"
+                                           value="{{ $director->festival_day }}"
+                                           @if($director->festival_day) checked @endif
+                                    >
+                                    @error('festival_day')
+                                    <div class="text-red-500 text-sm">{{ $message }}</div> @enderror
+
+                                    <label for="festival_day" class="block text-sm font-medium text-gray-700">
+                                        Festival Day
+                                    </label>
+                                </div>
+                            </div>
+                        </fieldset>
+
+                        <fieldset class="mt-6">
+                            <legend class="text-base font-medium">
                                 Counts
                             </legend>
                             <div class="sm:col-span-2 mt-1">
@@ -353,7 +396,7 @@
                                 <div class="mt-1">
                                     <input type="text" name="elem_student_count" id="elem_student_count" autocomplete=""
                                            class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md @error('elem_student_count') border border-gray-300 @enderror"
-                                           value="{{ $director->elem_student_count }}"
+                                           value="{{ $director->studentCountElementary }}"
                                     >
                                     @error('elem_student_count')
                                     <div class="text-red-500 text-sm">{{ $message }}</div> @enderror
@@ -365,14 +408,13 @@
                                 <div class="mt-1">
                                     <input type="text" name="jhs_student_count" id="jhs_student_count" autocomplete=""
                                            class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md @error('jsh_student_count') border border-gray-300 @enderror"
-                                           value="{{ $director->jhs_student_count }}"
+                                           value="{{ $director->studentCountJhs }}"
                                     >
                                     @error('jsh_student_count')
                                     <div class="text-red-500 text-sm">{{ $message }}</div> @enderror
                                 </div>
                             </div>
                         </fieldset>
-
                     </div>
 
             </div>

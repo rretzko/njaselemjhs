@@ -95,6 +95,9 @@ class DirectorController extends Controller
             'membership' => $request['membership'],
             'elem_student_count' => $request['elem_student_count'] ?? 0,
             'jhs_student_count' => $request['jhs_student_count'] ?? 0,
+            'judging_day' => is_null($request['judging_day']) ? 0 : 1,
+            'rehearsal_day' => is_null($request['rehearsal_day']) ? 0 : 1,
+            'festival_day' => is_null($request['festival_day']) ? 0 : 1,
         ]);
 
         $director->user->update(

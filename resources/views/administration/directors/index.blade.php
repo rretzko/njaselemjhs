@@ -36,6 +36,9 @@
                                             School [2022 students] (click for 2022 students)
                                         </th>
                                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            Ensembles
+                                        </th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                             Email
                                         </th>
                                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -61,6 +64,9 @@
                                                 <a href="{{ route('administration.students',['director' => $director]) }}" class="text-indigo-600 hover:text-indigo-900">
                                                     {{ $director->school }} [{{ $director->countCurrentStudents ?: '-'}}]
                                                 </a>
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-center">
+                                                {{ $director->hasStudentsIn }}
                                             </td>
                                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                                 {{ $director->user->email }}

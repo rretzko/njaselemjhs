@@ -50,15 +50,9 @@ class Director extends Model
      */
     public function getHasStudentsInAttribute(): string
     {
-        $elementary = Student::where('user_id', $this->user_id)
-            ->where('event_id', Event::currentEvent()->first()->id)
-            ->where('ensemble_id', 1)
-            ->count();
+        $elementary = $this->getStudentCountElementaryAttribute();
 
-        $jhs = Student::where('user_id', $this->user_id)
-            ->where('event_id', Event::currentEvent()->first()->id)
-            ->where('ensemble_id', 2)
-            ->count();
+        $jhs = $this->getStudentCountJhsAttribute();
 
         if ($elementary && $jhs) {
             $has = 'E/J';
@@ -71,6 +65,22 @@ class Director extends Model
         }
 
         return $has;
+    }
+
+    public function getStudentCountElementaryAttribute()
+    {
+        return Student::where('user_id', $this->user_id)
+            ->where('event_id', Event::currentEvent()->first()->id)
+            ->where('ensemble_id', 1)
+            ->count();
+    }
+
+    public function getStudentCountJhsAttribute()
+    {
+        return Student::where('user_id', $this->user_id)
+            ->where('event_id', Event::currentEvent()->first()->id)
+            ->where('ensemble_id', 2)
+            ->count();
     }
 
     public function students()
