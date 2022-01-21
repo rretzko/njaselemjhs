@@ -55,12 +55,29 @@ class AdjudicatorController extends Controller
      */
     public function show(Adjudicator $adjudicator, Student $student)
     {
+        /**
+         * manual workaround
+         * returned adjudicators should be unique to the adjudicators user_id
+         * Multiple rows are returned when the room is adjudicating multiple voices
+         * @todo probably a better way to do this via table design or Eloquent
+         */
+        $adjudicators = collect();
+        $userids = [];
+        foreach(Room::find($adjudicator->room_id)->adjudicators AS $adjudicator){
+            if($adjudicator->voicepart_id === $student->voicepart_id){
+
+                $adjudicators->push($adjudicator);
+            }
+        }
+
+        $eventadjudicator = $student->getEventAdjudicatorAttribute();
+
         return view('adjudicators.show',
             [
-                'adjudicator' => $adjudicator,
-                'adjudicators' => Room::find($adjudicator->room_id)->adjudicators,
+                'adjudicator' => $eventadjudicator,
+                'adjudicators' => $adjudicators,
                 'adjudicatorscores' => Score::where('student_id', $student->id)
-                    ->where('adjudicator_id', $adjudicator->id)
+                    ->where('adjudicator_id', $eventadjudicator->id)
                     ->get(),
                 'student' => $student,
             ]);

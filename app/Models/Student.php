@@ -51,6 +51,20 @@ class Student extends Model
         return $this->ensemble->descr;
     }
 
+    /**
+     * Designed for situations where the same adjudicator judges multiple voice parts
+     * This method returns the correct adjudicator row for $this student's voice part
+     *
+     * @return mixed
+     */
+    public function getEventAdjudicatorAttribute()
+    {
+         return Adjudicator::where('event_id', Event::currentEvent()->first()->id)
+            ->where('voicepart_id', $this->voicepart_id)
+            ->where('user_id', auth()->id())
+            ->first();
+    }
+
     public function getFullnameAttribute()
     {
         return $this->first.' '.$this->last;

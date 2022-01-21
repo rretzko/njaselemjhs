@@ -49,7 +49,7 @@
                     <div class="flex row flex-wrap space-x-4 space-y-1 mb-4">
                         @forelse($adjudicator->students() AS $token)
                             <div>
-                                <a href="{{ route('adjudication.show', ['adjudicator' => $adjudicator, 'student' => $token]) }}" class=" ">
+                                <a href="{{ route('adjudication.show', ['adjudicator' => $token->eventAdjudicator, 'student' => $token]) }}" class=" ">
                                     <button class=" border rounded-full px-1" title="{{ $token->fullnameAlpha }}"
                                         style="background-color: {{ $token->toleranceBackgroundColor }}"
                                     >
@@ -112,7 +112,7 @@
                         </thead>
                         <tbody>
                             <tr class="bg-white">
-                                <form method="post" action="{{ route('adjudication.update', ['adjudicator' => $adjudicator, 'student' => $student]) }}">
+                                <form method="post" action="{{ route('adjudication.update', ['adjudicator' => $student->eventAdjudicator, 'student' => $student]) }}">
                                     @csrf
                                     <td class="px-2 py-2 whitespace-nowrap text-sm font-medium text-gray-900 text-center border-l-4">
                                         <audio controls>
