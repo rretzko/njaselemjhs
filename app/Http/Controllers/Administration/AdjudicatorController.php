@@ -23,7 +23,7 @@ class AdjudicatorController extends Controller
     public function index(Event $event)
     {
         $table = new AdjudicatorsTable(['event' => $event]);
-dd($table);
+
         return view('administration.adjudicators.index',
             [
                 'directors' => $event->getAdjudicatorCandidatesAttribute(),
@@ -43,9 +43,22 @@ dd($table);
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Event $event)
     {
-        //
+        $table = new AdjudicatorsTable(['event' => $event]);
+
+        return view('administration.adjudicators.index',
+            [
+                'directors' => $event->getAdjudicatorCandidatesAttribute(),
+                'adjudicators' => Adjudicator::all(),
+                'ensemble' => new Ensemble,
+                'ensembles' => Ensemble::all(),
+                'event' => $event,
+                'room' => new Room,
+                'rooms' => Room::orderBy('name')->get(),
+                'table' => $table->table,
+                'voiceparts' => Voicepart::orderBy('descr')->get(),
+            ]);
     }
 
     /**

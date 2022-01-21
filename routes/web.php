@@ -82,7 +82,7 @@ Route::group(['middleware' => 'auth'],
             ->name('administration.events.update');
 
         /** EVENT ADJUDICATORS */
-        Route::get('/administration/adjudicators/{event}', [App\Http\Controllers\Administration\AdjudicatorController::class, 'index'])
+        Route::get('/administration/adjudicators/{event}', [App\Http\Controllers\Administration\AdjudicatorController::class, 'create'])
             ->name('administration.adjudicators');
         Route::get('/administration/adjudicators/add/{event}', [App\Http\Controllers\Administration\AdjudicatorController::class, 'create'])
             ->name('administration.adjudicators.create');
