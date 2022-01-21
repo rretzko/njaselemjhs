@@ -23,7 +23,7 @@ class AdjudicatorController extends Controller
     public function index(Event $event)
     {
         $table = new AdjudicatorsTable(['event' => $event]);
-
+dd($table);
         return view('administration.adjudicators.index',
             [
                 'directors' => $event->getAdjudicatorCandidatesAttribute(),
