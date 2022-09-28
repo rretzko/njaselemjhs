@@ -46,8 +46,6 @@ class Event extends Model
         }
 
         return $last_event;
-
-
     }
 
     public function getEndDateYyyyMmDdAttribute()
