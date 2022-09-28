@@ -36,9 +36,17 @@ class Event extends Model
 
     public static function currentEvent()
     {
-        return Event::all()->filter(function($event){
-            return (($event->start_date <= now()) && ($event->end_date >= now()));
-        });
+        $last_event = Event::all()->filter(function($event){
+               return (($event->start_date <= now()) && ($event->end_date >= now()));
+            });
+
+        if(! $last_event->count()){
+
+            $last_event = Event::all()->last();
+        }
+
+        return $last_event;
+
 
     }
 
