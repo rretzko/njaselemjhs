@@ -62,6 +62,9 @@ Route::group(['middleware' => 'auth'],
         Route::get('/administration/directors', [App\Http\Controllers\Administration\DirectorController::class, 'index'])
             ->name('administration.directors');
 
+        Route::get('/administration/njacda/download/directors', [App\Http\Controllers\Administration\ExportDirectorsController::class, 'export'])
+            ->name('administration.download.directors');
+
         Route::get('/administration/njacda/upload/directors', [App\Http\Controllers\Administration\ImportDirectorsController::class, 'create'])
             ->name('administration.upload.directors');
 

@@ -17,11 +17,13 @@ class DirectorController extends Controller
      */
     public function index()
     {
-        return view('administration.directors.index', ['directors' => Director::orderBy('last')
-            ->orderBy('first')
-            ->get()
-            ->sortByDesc('countCurrentStudents')
-        ]);
+        return view('administration.directors.index',
+            [
+                'directors' => Director::orderBy('last')
+                    ->orderBy('first')
+                    ->get()
+            ]
+        );
     }
 
     /**
