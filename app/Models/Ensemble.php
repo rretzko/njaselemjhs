@@ -28,7 +28,7 @@ class Ensemble extends Model
     {
         $rooms = collect();
 
-        foreach($this->adjudicators AS $adjudicator){
+        foreach($this->adjudicators->where('event_id', Event::currentEvent()->first()->id) AS $adjudicator){
 
             $rooms->push(Room::find($adjudicator->room_id));
         }
