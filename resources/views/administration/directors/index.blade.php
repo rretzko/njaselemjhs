@@ -26,7 +26,7 @@
 
                                 {{-- DOWNLOAD BUTTON --}}
                                 <div class="mb-3 text-right mr-3">
-                                    <a href="{{ route('administration.download.directors') }}" class="bg-green-500 text-white rounded px-2 text-sm ">
+                                    <a href="{{ route('administration.download.directors') }}" style="background-color: rgba(0,255,0,0.5); color: white; border-radius: 0.5rem;" class="bg-green-500 text-white rounded px-2 text-sm ">
                                         Download
                                     </a>
                                 </div>
