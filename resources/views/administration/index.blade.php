@@ -45,6 +45,16 @@
                             Reports
                         </a>
                     </li>
+                    <li>
+                        <a href="{{ route('administration.loginas.edit') }}">
+                            Log In As...
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('administration.changepassword.edit') }}">
+                            Change Password
+                        </a>
+                    </li>
                 </ol>
             </div>
         </div>

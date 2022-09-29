@@ -49,6 +49,17 @@ Route::group(['middleware' => 'auth'],
         Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])
             ->name('dashboard');
 
+        /** ADMINISTRATOR MISC */
+        Route::get('/administration/changepassword', [App\Http\Controllers\Administration\ChangePasswordController::class, 'edit'])
+            ->name('administration.changepassword.edit');
+        Route::post('/administration/changepassword/update', [App\Http\Controllers\Administration\ChangePasswordController::class, 'update'])
+            ->name('administration.changepassword.update');
+        Route::get('/administration/loginas', [App\Http\Controllers\Administration\LogInAsController::class, 'edit'])
+            ->name('administration.loginas.edit');
+        Route::post('/administration/loginas/update', [App\Http\Controllers\Administration\LogInAsController::class, 'update'])
+            ->name('administration.loginas.update');
+
+
         /** DIRECTORS **/
         Route::get('/administration/director/{director}', [App\Http\Controllers\Administration\DirectorController::class, 'edit'])
             ->name('administration.director');
