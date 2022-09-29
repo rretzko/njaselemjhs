@@ -59,7 +59,7 @@ class Student extends Model
      */
     public function getEventAdjudicatorAttribute()
     {
-         return Adjudicator::where('event_id', Event::currentEvent()->first()->id)
+         return Adjudicator::where('event_id', Event::currentEvent()->id)
             ->where('voicepart_id', $this->voicepart_id)
             ->where('user_id', auth()->id())
             ->first();
