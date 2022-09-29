@@ -86,7 +86,7 @@
                 <div id="labels" class=" mb-4">
                     <div style="">
                         <label for="first" class="block text-sm font-medium text-gray-700">
-                            Start Date
+                            End Date
                         </label>
                         <div style="" class="mt-1">
                             <input type="date" name="end_date" id="short_name" autocomplete=""
