@@ -12,6 +12,8 @@ class Director extends Model
     protected $guarded = [];
     protected $primaryKey = 'user_id';
 
+    protected $with = ['user'];
+
     public function getCountCurrentStudentsAttribute() : int
     {
         $eventid = Event::currentEvent()->first()->id;
