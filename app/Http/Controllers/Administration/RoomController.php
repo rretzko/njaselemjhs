@@ -19,7 +19,7 @@ class RoomController extends Controller
         return view('administration.events.rooms.index',
             [
                 'event' => $event,
-                'rooms' => Room::all(),
+                'rooms' => Room::orderBy('order_by')->get(),
             ]);
     }
 

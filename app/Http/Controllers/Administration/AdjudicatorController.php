@@ -32,9 +32,9 @@ class AdjudicatorController extends Controller
                 'ensembles' => Ensemble::all(),
                 'event' => $event,
                 'room' => new Room,
-                'rooms' => Room::orderBy('name')->get(),
+                'rooms' => Room::orderBy('order_by')->get(),
                 'table' => $table->table,
-                'voiceparts' => Voicepart::orderBy('descr')->get(),
+                'voiceparts' => Voicepart::orderBy('order_by')->get(),
             ]);
     }
 
@@ -55,9 +55,9 @@ class AdjudicatorController extends Controller
                 'ensembles' => Ensemble::all(),
                 'event' => $event,
                 'room' => new Room,
-                'rooms' => Room::orderBy('name')->get(),
+                'rooms' => Room::orderBy('order_by')->get(),
                 'table' => $table->table,
-                'voiceparts' => Voicepart::orderBy('descr')->get(),
+                'voiceparts' => Voicepart::orderBy('order_by')->get(),
             ]);
     }
 

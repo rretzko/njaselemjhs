@@ -68,7 +68,7 @@ class AdjudicatorsTable extends Model
                     $str .= $room->name;
                 $str .= '</td>';
                 $str .= '<td class="' . $this->tdclass . '">';
-                    foreach ($room->adjudicators->sortBy('director.last') as $adjudicator){
+                    foreach ($room->adjudicators->where('ensemble_id', $ensemble->id)->sortBy('director.last') as $adjudicator){
                         $str .= $adjudicator->director->fullnameAlpha.' ('.$adjudicator->voicepart->abbr.')'.'<br />';
                     }
                 $str .= '</td>';

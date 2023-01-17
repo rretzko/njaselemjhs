@@ -26,6 +26,8 @@ class Ensemble extends Model
 
     public function rooms()
     {
+        return Room::where('ensemble_id', $this->id)->orderBy('order_by')->get();
+     /*
         $rooms = collect();
 
         foreach($this->adjudicators->where('event_id', Event::currentEvent()->first()->id) AS $adjudicator){
@@ -34,6 +36,7 @@ class Ensemble extends Model
         }
 
         return $rooms->unique();
+     */
     }
 
     public function voiceparts()
