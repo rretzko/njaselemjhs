@@ -13,7 +13,10 @@ class Room extends Model
 
     public function adjudicators()
     {
-        return $this->hasMany(Adjudicator::class);
+        $currentEventId = Event::currentEvent()->first()->id;
+
+        return $this->hasMany(Adjudicator::class)
+            ->where('event_id', $currentEventId);
     }
 
     public function events()
