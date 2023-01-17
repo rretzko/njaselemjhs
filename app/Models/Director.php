@@ -12,7 +12,12 @@ class Director extends Model
     protected $guarded = [];
     protected $primaryKey = 'user_id';
 
-    protected $with = ['user'];
+    protected $with = ['user', 'events'];
+
+    public function events()
+    {
+        return $this->hasMany(Event::class,'id','user_id');
+    }
 
     public function getCountCurrentStudentsAttribute() : int
     {

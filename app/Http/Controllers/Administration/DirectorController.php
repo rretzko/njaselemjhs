@@ -7,6 +7,8 @@ use App\Http\Requests\DirectorRequest;
 use App\Models\Director;
 use App\Http\Requests\StoreDirectorRequest;
 use App\Http\Requests\UpdateDirectorRequest;
+use App\Models\Event;
+use Illuminate\Support\Facades\DB;
 
 class DirectorController extends Controller
 {
@@ -17,11 +19,21 @@ class DirectorController extends Controller
      */
     public function index()
     {
+        $currentEvent = Event::currentEvent()->first();
+
+        $ids = DB::table('director_event')
+           ->select('user_id')
+           ->where('event_id', $currentEvent->id)
+           ->get()
+           ->pluck('user_id');
+
+        $directors = Director::find($ids)->sortBy('last');
+
         return view('administration.directors.index',
             [
-                'directors' => Director::orderBy('last')
-                    ->orderBy('first')
-                    ->get()
+                'event' => $currentEvent,
+                'eventYear' => substr($currentEvent->name,0,4),
+                'directors' => $directors,
             ]
         );
     }

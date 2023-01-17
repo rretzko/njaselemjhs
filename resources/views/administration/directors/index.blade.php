@@ -42,7 +42,7 @@
                                             Name (click to edit)
                                         </th>
                                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                            School [2022 students] (click for 2022 students)
+                                            School [{{ $eventYear }} students] (click for {{ $eventYear }} students)
                                         </th>
                                         <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                             Ensembles
