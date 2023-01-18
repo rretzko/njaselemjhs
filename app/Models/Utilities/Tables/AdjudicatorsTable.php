@@ -68,8 +68,11 @@ class AdjudicatorsTable extends Model
                     $str .= $room->name;
                 $str .= '</td>';
                 $str .= '<td class="' . $this->tdclass . '">';
-                    foreach ($room->adjudicators->where('ensemble_id', $ensemble->id)->sortBy('director.last') as $adjudicator){
-                        $str .= $adjudicator->director->fullnameAlpha.' ('.$adjudicator->voicepart->abbr.')'.'<br />';
+                    //foreach ($room->adjudicators->where('ensemble_id', $ensemble->id)->sortBy('director.last') as $adjudicator){
+                    //    $str .= $adjudicator->director->fullnameAlpha.' ('.$adjudicator->voicepart->abbr.')'.'<br />';
+                    //}
+                    foreach ($room->adjudicatorsWithVoiceAbbr as $adjudicator){
+                        $str .= $adjudicator.'<br />';
                     }
                 $str .= '</td>';
                 $str .= '<td class="' . $this->tdclass . '">';
