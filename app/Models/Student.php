@@ -99,6 +99,11 @@ class Student extends Model
         return 'rgba(255,0,0,.1)'; //red
     }
 
+    public function getVoicepartAbbrAttribute()
+    {
+        return $this->voicepart->abbr;
+    }
+
     public function getVoicepartDescrAttribute()
     {
         return $this->voicepart->descr;
