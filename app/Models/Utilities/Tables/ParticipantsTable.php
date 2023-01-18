@@ -3,6 +3,7 @@
 namespace App\Models\Utilities\Tables;
 
 use App\Models\Participant;
+use App\Models\Student;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -82,16 +83,16 @@ class ParticipantsTable extends Model
 
         foreach($this->ensemble->voiceparts AS $voicepart){
 
-            $str .= '<td>'.Participant::where('event_id', $this->event->id)
+            $str .= '<td>'.Student::where('event_id', $this->event->id)
                 ->where('ensemble_id', $this->ensemble->id)
                 ->where('voicepart_id', $voicepart->id)
-                ->count('student_id')
+                ->count('id')
                 .'</td>';
         }
 
-        $str .= '<td>'.Participant::where('event_id', $this->event->id)
+        $str .= '<td>'.Student::where('event_id', $this->event->id)
                 ->where('ensemble_id', $this->ensemble->id)
-                ->count('student_id')
+                ->count('id')
             .'</td>';
 
         $str .= '</tr>';

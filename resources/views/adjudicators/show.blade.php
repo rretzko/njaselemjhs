@@ -231,11 +231,11 @@
                                 </tr>
                                 <tr>
                                     <th>Judge</th>
-                                    <th>VQ</th>
-                                    <th>I</th>
-                                    <th>VQ</th>
-                                    <th>I</th>
-                                    <th>M</th>
+                                    <th title="Vocal Quality">VQ</th>
+                                    <th title="Intonation">I</th>
+                                    <th title="Vocal Quality">VQ</th>
+                                    <th title="Intonation">I</th>
+                                    <th title="Musicanship">M</th>
                                     <th>Total</th>
                                 </tr>
                                 </thead>
