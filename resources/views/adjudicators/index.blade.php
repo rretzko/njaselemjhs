@@ -49,6 +49,7 @@
                     <div class="flex row flex-wrap space-x-4 space-y-1 mb-4">
                         @if($adjudicator)
                             @forelse($adjudicator->students() AS $token)
+
                                 <div>
                                     <a href="{{ route('adjudication.show', ['adjudicator' => $token->eventAdjudicator, 'student' => $token]) }}" class=" ">
                                         <button class="bg-indigo-50 border rounded-full px-1"

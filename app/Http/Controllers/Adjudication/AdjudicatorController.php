@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Adjudication;
 
 use App\Http\Controllers\Controller;
 use App\Models\Adjudicator;
+use App\Models\Event;
 use App\Models\Room;
 use App\Models\Score;
 use App\Models\Student;
@@ -18,9 +19,11 @@ class AdjudicatorController extends Controller
      */
     public function index()
     {
+        $adjudicator = Adjudicator::where('user_id', auth()->id())->where('event_id', Event::currentEvent()->first()->id)->first();
+
         return view('adjudicators.index',
             [
-                'adjudicator' => Adjudicator::where('user_id', auth()->id())->first(),
+                'adjudicator' => $adjudicator,
             ]
         );
     }

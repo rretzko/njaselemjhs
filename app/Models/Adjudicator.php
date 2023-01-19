@@ -100,12 +100,11 @@ class Adjudicator extends Model
      */
     private function voiceparts()
     {
-        return (Adjudicator::where('user_id', $this->user_id)
-            ->where('room_id', $this->room_id)
-            ->where('event_id', $this->event_id)
+        return Adjudicator::where('user_id', $this->user_id)
+            ->where('event_id', Event::currentEvent()->first()->id)
             ->where('ensemble_id', $this->ensemble_id)
             ->pluck('voicepart_id')
-            ->toArray());
+            ->toArray();
     }
 
 }
