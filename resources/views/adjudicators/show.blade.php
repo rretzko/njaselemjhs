@@ -286,6 +286,7 @@
 
             total = parseInt(document.getElementById('vvq').value) +
                 parseInt(document.getElementById('vi').value) +
+                parseInt(document.getElementById('vm').value) +
                 parseInt(document.getElementById('svq').value) +
                 parseInt(document.getElementById('si').value) +
                 parseInt(document.getElementById('sm').value);
