@@ -6,6 +6,7 @@ use App\Models\Utilities\FinalScore;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
 
 class Student extends Model
 {
@@ -86,6 +87,16 @@ class Student extends Model
     public function getSchoolNameAttribute()
     {
         return $this->director->school;
+    }
+
+    public function getScoreTotalAttribute(): int
+    {
+        $total = DB::table('scores')
+            ->where('student_id', $this->id)
+            ->where('event_id', Event::currentEvent()->first()->id)
+            ->sum('score');
+
+        return $total ?: 0;
     }
 
     public function getToleranceBackgroundColorAttribute()
