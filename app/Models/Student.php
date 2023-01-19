@@ -105,7 +105,7 @@ class Student extends Model
 
     public function getToleranceBackgroundColorAttribute()
     {
-        $fullcount = 15;
+        $fullcount = 18; //three adjudicators at six scores per adjudicator
 
         $scorescount = $this->scores->count();
 
@@ -144,7 +144,7 @@ class Student extends Model
     public function logAverageScore()
     {
         //total other-adjudication scores
-        $otherscores = 10;
+        $otherscores = 12;
 
         $scores = $this->scores;
 
@@ -159,7 +159,7 @@ class Student extends Model
 
             //array of averaged scores
             $avgdscores = [];
-            for($i=1;$i<6;$i++) {
+            for($i=1;$i<7;$i++) { //six total scores per adjudicator
 
                 //find the scores for the scoredefinition_id (as $i) other than the student's teacher
                 $scores = Score::where('student_id', $this->id)
