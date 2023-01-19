@@ -15,39 +15,42 @@
         <thead>
             <tr>
                 <th colspan="2" style="border: 0;"></th>
-                <th colspan="5">Judge 1</th>
-                <th colspan="5">Judge 2</th>
-                <th colspan="5">Judge 3</th>
+                <th colspan="6" style="border-right: 3px solid black;" >Judge 1</th>
+                <th colspan="6" style="border-right: 3px solid black;" >Judge 2</th>
+                <th colspan="6" style="border-right: 3px solid black;" >Judge 3</th>
                 <th colspan="2" style="border: 0;"></th>
             </tr>
             <tr>
                 <th colspan="2" style="border: 0;"></th>
-                <th colspan="2">Solo</th>
-                <th colspan="3">Vocalise</th>
-                <th colspan="2">Solo</th>
-                <th colspan="3">Vocalise</th>
-                <th colspan="2">Solo</th>
-                <th colspan="3">Vocalise</th>
+                <th colspan="3" style="border-right: 3px solid black;" >Vocalise</th>
+                <th colspan="3" style="border-right: 3px solid black;" >Solo</th>
+                <th colspan="3" style="border-right: 3px solid black;" >Vocalise</th>
+                <th colspan="3" style="border-right: 3px solid black;" >Solo</th>
+                <th colspan="3" style="border-right: 3px solid black;" >Vocalise</th>
+                <th colspan="3" style="border-right: 3px solid black;" >Solo</th>
                 <th colspan="2" style="border-top: 0; border-right: 0;"></th>
             </tr>
             <tr>
                 <th>Student</th>
                 <th>VP</th>
-                <th>VQ</th>
+                <th>Q</th>
                 <th>I</th>
-                <th>vq</th>
+                <th style="border-right: 3px solid black;" >M</th>
+                <th>q</th>
                 <th>i</th>
-                <th>m</th>
-                <th>VQ</th>
+                <th style="border-right: 3px solid black;" >m</th>
+                <th>Q</th>
                 <th>I</th>
-                <th>vq</th>
+                <th style="border-right: 3px solid black;" >M</th>
+                <th>q</th>
                 <th>i</th>
-                <th>m</th>
-                <th>VQ</th>
+                <th style="border-right: 3px solid black;" >m</th>
+                <th>Q</th>
                 <th>I</th>
-                <th>vq</th>
+                <th style="border-right: 3px solid black;" >M</th>
+                <th>q</th>
                 <th>i</th>
-                <th>m</th>
+                <th style="border-right: 3px solid black;" >m</th>
                 <th>Tot</th>
                 <th>Y/N</th>
             </tr>
@@ -58,7 +61,7 @@
                     <td style="text-align: left;">{{ $finalscore->student->fullnameAlpha }}</td>
                     <td>{{ $finalscore->voicepartAbbr }}</td>
                     @foreach($finalscore->studentScores AS $score)
-                        <td>{{ $score->score }}</td>
+                        <td style=" @if(! ($loop->iteration % 3)) border-right: 3px solid black; @endif " >{{ $score }}</td>
                     @endforeach
                     <td>{{ (int)$finalscore->score }}</td>
                     <td>{{ $finalscore->isParticipant ? 'acc' : 'n/a' }}</td>
