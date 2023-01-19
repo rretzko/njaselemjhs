@@ -60,6 +60,16 @@ class Adjudicator extends Model
             : [0,0,0,0,0,0,0,0];
     }
 
+    public function scoreTotal(Student $student): int
+    {
+        $total = DB::table('scores')
+            ->where('student_id', $student->id)
+            ->where('event_id', Event::currentEvent()->first()->id)
+            ->sum('score');
+
+        return $total ?: 0;
+    }
+
     /**
      * Return true if panel to which $this belongs includes $student teacher
      * @todo add event_id conditional

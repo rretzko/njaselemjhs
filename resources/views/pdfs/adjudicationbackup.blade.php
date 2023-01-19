@@ -4,7 +4,7 @@
     td,th{border: 1px solid black;}
 </style>
 @foreach($students AS $studentKey => $student)
-    @if($loop->iteration < 380)
+    @if($loop->iteration < 390)
         <div id="page" class=" @if(! ($loop->iteration % 3)) page_break @endif " >
 
                 <header style="font-size: 1.5rem; margin-bottom: 1rem;">
@@ -61,9 +61,9 @@
                         @endforelse
 
                             <tr>
-                                <td style="">Total</td>
-                                <td colspan="6"></td>
-                                <td style="">###</td>
+                                <td style="text-align: right;">Total</td>
+                                <td colspan="7"></td>
+                                <td style="text-align: center;">{{ $adjudicator->scoreTotal($student) }}</td>
                             </tr>
 
                         </tbody>
