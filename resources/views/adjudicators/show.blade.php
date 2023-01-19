@@ -117,7 +117,7 @@
                                     @csrf
                                     <td class="px-2 py-2 whitespace-nowrap text-sm font-medium text-gray-900 text-center border-l-4">
                                         <audio controls>
-                                            <source src="{{ $student->mp3 }}" type="audio/mpeg">
+                                            <source src="{{ $student->mp3 }}" type="audio/mp3">
                                             Your browser does not support the audio element
                                         </audio>
                                         @error('mp3') <div class="text-red-500 text-sm">{{ $message }}</div> @enderror
