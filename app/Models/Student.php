@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\Utilities\FinalScore;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Collection;
 
 class Student extends Model
 {
@@ -44,6 +45,13 @@ class Student extends Model
     public function ensemble()
     {
         return $this->belongsTo(Ensemble::class);
+    }
+
+    public function getAdjudicatorsAttribute(): Collection
+    {
+        return Adjudicator::where('event_id', Event::currentEvent()->first()->id)
+            ->where('voicepart_id',$this->voicepart_id)
+            ->get();
     }
 
     public function getEnsembleNameAttribute()

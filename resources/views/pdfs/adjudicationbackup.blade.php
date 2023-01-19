@@ -3,54 +3,77 @@
     table{border-collapse: collapse;}
     td,th{border: 1px solid black;}
 </style>
-@foreach($students AS $student)
-    <div id="page" class="page_break">
-    @for($i=0; $i<3;$i++)
-            <header style="font-size: 1.5rem; margin-bottom: 1rem;">
-                <div >
-                    <b>{{ $student->fullnameAlpha }}</b>
+@foreach($students AS $studentKey => $student)
+    @if($loop->iteration < 380)
+        <div id="page" class=" @if(! ($loop->iteration % 3)) page_break @endif " >
+
+                <header style="font-size: 1.5rem; margin-bottom: 1rem;">
+                    <div >
+                        <b>{{ $student->fullnameAlpha }}</b>
+                    </div>
+                    <div>
+                        Grade: <b>{{ $student->grade }}</b>
+                    </div>
+                    <div>
+                        Ensemble: <b>{{ $student->ensembleName }} - {{ $student->voicepartDescr }}</b>
+                    </div>
+                </header>
+
+                <div id="table" style="margin-bottom: 55px;">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th colspan="3" style="text-align: center;">VOCALISE</th>
+                                <th colspan="4" style="text-align: center;">SOLO</th>
+                                <th style="border-top: 0; border-right: 0;"></th>
+                            </tr>
+                            <tr>
+                                <td style="font-weight: bold;text-align: center;">Adjudicator</td>
+                                <td style="font-weight: bold;text-align: center;">Vocal Quality</td>
+                                <td style="font-weight: bold;text-align: center;">Intonation</td>
+                                <td style="font-weight: bold;text-align: center;">Total Vocalise</td>
+                                <td style="font-weight: bold;text-align: center;">Vocal Quality</td>
+                                <td style="font-weight: bold;text-align: center;">Intonation</td>
+                                <td style="font-weight: bold;text-align: center;">Musicianship</td>
+                                <td style="font-weight: bold;text-align: center;">Total Solo</td>
+                                <td style="font-weight: bold;text-align: center;">OVERALL TOTAL</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                        @forelse($student->adjudicators AS $adjudicator)
+
+                            <tr>
+                                <td>{{ $adjudicator->shortNameAlpha }}</td>
+
+                                @forelse($adjudicator->scoreArray($student) AS $score)
+
+                                    <td style="text-align: center;"> {{ $score }} </td>
+                                @empty
+                                    <td colspan="7">No scores found</td>
+                                @endif
+
+                            </tr>
+
+                        @empty
+                            <tr><td colspan="8">No Adjudicator Found</td> </tr>
+                        @endforelse
+
+                            <tr>
+                                <td style="">Total</td>
+                                <td colspan="6"></td>
+                                <td style="">###</td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+
                 </div>
-                <div>
-                    Grade: <b>{{ $student->grade }}</b>
-                </div>
-                <div>
-                    Ensemble: <b>{{ $student->ensembleName }} - {{ $student->voicepartDescr }}</b>
-                </div>
-            </header>
-            <div id="table" style="margin-bottom: 110px;">
-                <table>
-                    <thead>
-                        <tr>
-                            <th colspan="3" style="text-align: center;">VOCALISE</th>
-                            <th colspan="4" style="text-align: center;">SOLO</th>
-                            <th style="border-top: 0; border-right: 0;"></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td style="font-weight: bold;text-align: center;">Vocal Quality</td>
-                            <td style="font-weight: bold;text-align: center;">Intonation</td>
-                            <td style="font-weight: bold;text-align: center;">Total Vocalise</td>
-                            <td style="font-weight: bold;text-align: center;">Vocal Quality</td>
-                            <td style="font-weight: bold;text-align: center;">Intonation</td>
-                            <td style="font-weight: bold;text-align: center;">Musicianship</td>
-                            <td style="font-weight: bold;text-align: center;">Total Solo</td>
-                            <td style="font-weight: bold;text-align: center;">OVERALL TOTAL</td>
-                        </tr>
-                        <tr>
-                            <td style="height: 40px;"></td>
-                            <td style=""></td>
-                            <td style=""></td>
-                            <td style=""></td>
-                            <td style=""></td>
-                            <td style=""></td>
-                            <td style=""></td>
-                            <td style=""></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-    @endfor
-    </div>
+
+
+        </div>
+    @endif
 
 @endforeach
+

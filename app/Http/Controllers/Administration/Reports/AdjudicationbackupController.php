@@ -16,6 +16,8 @@ class AdjudicationbackupController extends Controller
      */
     public function index()
     {
+        set_time_limit(120);
+
         $event = Event::currentEvent()->first();
 
         $students = Student::where('event_id', $event->id)

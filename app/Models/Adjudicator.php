@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Adjudicator extends Model
 {
@@ -24,6 +25,39 @@ class Adjudicator extends Model
     public function event()
     {
         return $this->belongsTo(Event::class);
+    }
+
+    public function getFullnameAlphaAttribute(): string
+    {
+        return $this->director->fullnameAlpha;
+    }
+
+    public function getShortNameAlphaAttribute(): string
+    {
+        return substr($this->director->fullnameAlpha,0,12);
+    }
+
+    public function scoreArray(Student $student): array
+    {
+        $scores =  DB::table('scores')
+            ->where('student_id', $student->id)
+            ->where('adjudicator_id', $this->id)
+            ->where('event_id', Event::currentEvent()->first()->id)
+            ->pluck('score')
+            ->toArray();
+
+        return count($scores)
+            ? [
+                $scores[0], //Vocalese Vocal Quality
+                $scores[1], //Vocalese Intonation
+                ($scores[0] + $scores[1]), //Vocalese Total
+                $scores[2], //Solo Vocal Quality
+                $scores[3], //Solo Intonation
+                $scores[4], //Solo Musicianship
+                ($scores[2] + $scores[3] + $scores[4]), //Solo Total
+                array_sum($scores), //All Scores Total
+              ]
+            : [0,0,0,0,0,0,0,0];
     }
 
     /**
