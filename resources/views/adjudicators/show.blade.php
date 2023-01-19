@@ -53,7 +53,7 @@
                                     <button class=" border rounded-full px-1" title="{{ $token->fullnameAlpha }}"
                                         style="background-color: {{ $token->toleranceBackgroundColor }}"
                                     >
-                                        {{ $token->id }}
+                                        {!! $token->id.' <span class="text-sm">('.strtolower($token->voicepart->abbr).')</span>' !!}
                                     </button>
                                 </a>
 
