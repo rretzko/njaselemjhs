@@ -89,6 +89,10 @@ class Student extends Model
         return $this->director->school;
     }
 
+    /**
+     * Return the total of student's scores for the CurrentEvent or 0
+     * @return int
+     */
     public function getScoreTotalAttribute(): int
     {
         $total = DB::table('scores')
