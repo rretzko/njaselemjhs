@@ -48,16 +48,17 @@ class Adjudicator extends Model
 
         return count($scores)
             ? [
-                $scores[0], //Vocalese Vocal Quality
-                $scores[1], //Vocalese Intonation
-                ($scores[0] + $scores[1]), //Vocalese Total
-                $scores[2], //Solo Vocal Quality
-                $scores[3], //Solo Intonation
-                $scores[4], //Solo Musicianship
-                ($scores[2] + $scores[3] + $scores[4]), //Solo Total
+                $scores[0], //Vocalise Vocal Quality
+                $scores[1], //Vocalise Intonation
+                $scores[2], //Vocalise Musicianship
+                ($scores[0] + $scores[1] + $scores[2]), //Vocalese Total
+                $scores[3], //Solo Vocal Quality
+                $scores[4], //Solo Intonation
+                $scores[5], //Solo Musicianship
+                ($scores[3] + $scores[4] + $scores[5]), //Solo Total
                 array_sum($scores), //All Scores Total
               ]
-            : [0,0,0,0,0,0,0,0];
+            : [0,0,0,0,0,0,0,0,0];
     }
 
     /**

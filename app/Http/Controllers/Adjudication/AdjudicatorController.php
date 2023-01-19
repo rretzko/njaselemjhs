@@ -108,7 +108,7 @@ class AdjudicatorController extends Controller
     public function update(Request $request, Adjudicator $adjudicator, Student $student)
     {
         $input = $request->validate([
-            'scores' => ['required','array', 'min:5','max:5'],
+            'scores' => ['required','array', 'min:6','max:6'],
             'scores.*' => ['required','numeric','min:1', 'max:9'],
         ]);
 

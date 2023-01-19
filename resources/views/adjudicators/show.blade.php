@@ -93,7 +93,7 @@
                         <thead class="bg-gray-50">
                         <tr>
                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" colspan="1"></th>
-                            <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider border border-l-4 " colspan="2" >VOCALISE</th>
+                            <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider border border-l-4 " colspan="3" >VOCALISE</th>
                             <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider border border-l-4" colspan="3" >SOLO</th>
                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-l-4" colspan="2"></th>
                         </tr>
@@ -101,6 +101,7 @@
                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider text-center border ">mp3</th>
                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider text-center border-l-4" title="Vocal Quality">VQ</th>
                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider text-center" title="Intonation">I</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider text-center" title="Musicianship">M</th>
 
                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider text-center border-l-4" title="Vocal Quality">VQ</th>
                             <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider text-center" title="Intonation">I</th>
@@ -147,13 +148,26 @@
                                             @endfor
                                         </select>
                                     </td>
+                                    <td class="px-2 py-2 whitespace-nowrap text-sm font-medium text-gray-900" title="Musicianship">
+                                        <select name="scores[]" id="vm" onchange="updateTotal();">
+                                            @for($i=1; $i<10; $i++)
+                                                <option value="{{ $i }}"
+                                                        @if($adjudicatorscores->count())
+                                                            @if($adjudicatorscores[2]->score === $i) selected @endif
+                                                    @endif
+                                                >
+                                                    {{ $i }}
+                                                </option>
+                                            @endfor
+                                        </select>
+                                    </td>
 
                                     <td class="px-2 py-2 whitespace-nowrap text-sm font-medium text-gray-900 border-l-4" title="Vocal Quality">
                                         <select name="scores[]" id="svq" onchange="updateTotal();">
                                             @for($i=1; $i<10; $i++)
                                                 <option value="{{ $i }}"
                                                     @if($adjudicatorscores->count())
-                                                        @if($adjudicatorscores[2]->score === $i) selected @endif
+                                                        @if($adjudicatorscores[3]->score === $i) selected @endif
                                                     @endif
                                                 >
                                                     {{ $i }}
@@ -166,7 +180,7 @@
                                             @for($i=1; $i<10; $i++)
                                                 <option value="{{ $i }}"
                                                     @if($adjudicatorscores->count())
-                                                        @if($adjudicatorscores[3]->score === $i) selected @endif
+                                                        @if($adjudicatorscores[4]->score === $i) selected @endif
                                                     @endif
                                                 >
                                                     {{ $i }}
@@ -179,7 +193,7 @@
                                             @for($i=1; $i<10; $i++)
                                                 <option value="{{ $i }}"
                                                     @if($adjudicatorscores->count())
-                                                        @if($adjudicatorscores[4]->score === $i) selected @endif
+                                                        @if($adjudicatorscores[5]->score === $i) selected @endif
                                                     @endif
                                                 >
                                                     {{ $i }}
@@ -225,17 +239,18 @@
                                 <thead>
                                 <tr>
                                     <th></th>
-                                    <th colspan="2">Vocalise</th>
-                                    <th colspan="3">Solo</th>
+                                    <th colspan="3" style="border-right: 3px solid black;">Vocalise</th>
+                                    <th colspan="3" style="border-right: 3px solid black;">Solo</th>
                                     <th></th>
                                 </tr>
                                 <tr>
                                     <th>Judge</th>
-                                    <th title="Vocal Quality">VQ</th>
+                                    <th title="Vocal Quality">Q</th>
                                     <th title="Intonation">I</th>
-                                    <th title="Vocal Quality">VQ</th>
+                                    <th style="border-right: 3px solid black;" title="Musicanship">M</th>
+                                    <th title="Vocal Quality">Q</th>
                                     <th title="Intonation">I</th>
-                                    <th title="Musicanship">M</th>
+                                    <th style="border-right: 3px solid black;" title="Musicanship">M</th>
                                     <th>Total</th>
                                 </tr>
                                 </thead>
@@ -246,9 +261,9 @@
                                             {{ $judge->director ? $judge->director->fullnameAlpha : $judge->user->name}}
                                         </td>
                                         @forelse($student->scoresByAdjudicator($judge) AS $score)
-                                            <td class="text-center">{{ $score->score }}</td>
+                                            <td class="text-center" style=" @if(! ($loop->iteration % 3))  border-right: 3px solid black; @endif ">{{ $score->score }}</td>
                                         @empty
-                                            <td colspan="5">No scores found</td>
+                                            <td colspan="6">No scores found</td>
                                         @endforelse
                                         <td class="text-center">{{ $student->adjudicatorTotal($judge) }}</td>
                                     </tr>

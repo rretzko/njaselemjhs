@@ -25,20 +25,21 @@
                         <thead>
                             <tr>
                                 <th></th>
-                                <th colspan="3" style="text-align: center;">VOCALISE</th>
-                                <th colspan="4" style="text-align: center;">SOLO</th>
+                                <th colspan="4" style="text-align: center; border-right: 2px solid black;">VOCALISE</th>
+                                <th colspan="4" style="text-align: center; border-right: 2px solid black;">SOLO</th>
                                 <th style="border-top: 0; border-right: 0;"></th>
                             </tr>
                             <tr>
                                 <td style="font-weight: bold;text-align: center;">Adjudicator</td>
-                                <td style="font-weight: bold;text-align: center;">Vocal Quality</td>
-                                <td style="font-weight: bold;text-align: center;">Intonation</td>
-                                <td style="font-weight: bold;text-align: center;">Total Vocalise</td>
-                                <td style="font-weight: bold;text-align: center;">Vocal Quality</td>
-                                <td style="font-weight: bold;text-align: center;">Intonation</td>
-                                <td style="font-weight: bold;text-align: center;">Musicianship</td>
-                                <td style="font-weight: bold;text-align: center;">Total Solo</td>
-                                <td style="font-weight: bold;text-align: center;">OVERALL TOTAL</td>
+                                <td style="font-weight: bold;text-align: center;">Q</td>
+                                <td style="font-weight: bold;text-align: center;">I</td>
+                                <td style="font-weight: bold;text-align: center;">M</td>
+                                <td style="font-weight: bold;text-align: center; border-right: 2px solid black; padding: 0 0.5rem;">Total</td>
+                                <td style="font-weight: bold;text-align: center;">Q</td>
+                                <td style="font-weight: bold;text-align: center;">I</td>
+                                <td style="font-weight: bold;text-align: center;">M</td>
+                                <td style="font-weight: bold;text-align: center; border-right: 2px solid black; padding: 0 0.5rem;">Total</td>
+                                <td style="font-weight: bold;text-align: center; padding: 0 0.5rem;">OVERALL</td>
                             </tr>
                         </thead>
                         <tbody>
@@ -50,7 +51,7 @@
 
                                 @forelse($adjudicator->scoreArray($student) AS $score)
 
-                                    <td style="text-align: center;"> {{ $score }} </td>
+                                    <td style="text-align: center; @if(! ($loop->iteration % 4)) border-right: 2px solid black; @endif "> {{ $score }} </td>
                                 @empty
                                     <td colspan="7">No scores found</td>
                                 @endif
@@ -62,7 +63,7 @@
                         @endforelse
 
                             <tr>
-                                <td colspan="8" style="text-align: right; padding-right: 0.5rem;">Total</td>
+                                <td colspan="9" style="text-align: right; padding-right: 0.5rem; border-right: 2px solid black;">Total</td>
                                 <td style="text-align: center;">{{ $student->scoreTotal }}</td>
                             </tr>
 
