@@ -58,11 +58,11 @@
                             </tr>
 
                         @empty
-                            <tr><td colspan="8">No Adjudicator Found</td> </tr>
+                            <tr><td colspan="9" style="padding: 0 0.5rem;">No Adjudicator Found</td> </tr>
                         @endforelse
 
                             <tr>
-                                <td colspan="8" style="text-align: right; padding-right: 0.5rem;">Total></td>
+                                <td colspan="8" style="text-align: right; padding-right: 0.5rem;">Total</td>
                                 <td style="text-align: center;">{{ $student->scoreTotal }}</td>
                             </tr>
 
