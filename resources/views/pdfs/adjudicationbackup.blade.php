@@ -4,8 +4,7 @@
     td,th{border: 1px solid black;}
 </style>
 @foreach($students AS $studentKey => $student)
-    {{-- uncomment for development environment
-    @if($loop->iteration < 300) --}}
+
         <div id="page" class=" @if(! ($loop->iteration % 3)) page_break @endif " >
 
                 <header style="font-size: 1.5rem; margin-bottom: 1rem;">
@@ -31,13 +30,13 @@
                             </tr>
                             <tr>
                                 <td style="font-weight: bold;text-align: center;">Adjudicator</td>
-                                <td style="font-weight: bold;text-align: center;">Q</td>
-                                <td style="font-weight: bold;text-align: center;">I</td>
-                                <td style="font-weight: bold;text-align: center;">M</td>
-                                <td style="font-weight: bold;text-align: center; border-right: 2px solid black; padding: 0 0.5rem;">Total</td>
-                                <td style="font-weight: bold;text-align: center;">Q</td>
-                                <td style="font-weight: bold;text-align: center;">I</td>
-                                <td style="font-weight: bold;text-align: center;">M</td>
+                                <td style="font-weight: bold;text-align: center; width: 3rem;">Q</td>
+                                <td style="font-weight: bold;text-align: center; width: 3rem;">I</td>
+                                <td style="font-weight: bold;text-align: center; width: 3rem;">M</td>
+                                <td style="font-weight: bold;text-align: center; border-right: 2px solid black; padding: 0 0.5rem; width: 3rem;">Total</td>
+                                <td style="font-weight: bold;text-align: center; width: 3rem;">Q</td>
+                                <td style="font-weight: bold;text-align: center; width: 3rem;">I</td>
+                                <td style="font-weight: bold;text-align: center; width: 3rem;">M</td>
                                 <td style="font-weight: bold;text-align: center; border-right: 2px solid black; padding: 0 0.5rem;">Total</td>
                                 <td style="font-weight: bold;text-align: center; padding: 0 0.5rem;">OVERALL</td>
                             </tr>
@@ -59,12 +58,12 @@
                             </tr>
 
                         @empty
-                            <tr><td colspan="9" style="padding: 0 0.5rem;">No Adjudicator Found</td> </tr>
+                            <tr><td colspan="10" style="padding: 0 0.5rem;">No Adjudicator Found</td> </tr>
                         @endforelse
 
                             <tr>
                                 <td colspan="9" style="text-align: right; padding-right: 0.5rem; border-right: 2px solid black;">Total</td>
-                                <td style="text-align: center;">{{ $student->scoreTotal }}</td>
+                                <td style="text-align: center;">{{ $student->scoreTotal ?: ''}}</td>
                             </tr>
 
                         </tbody>
@@ -74,8 +73,6 @@
 
 
         </div>
-    {{-- uncomment for development environment
-    @endif --}}
 
 @endforeach
 

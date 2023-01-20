@@ -128,8 +128,10 @@ Route::group(['middleware' => 'auth'],
         /** REPORTS */
         Route::get('/administration/reports', [App\Http\Controllers\Administration\Reports\ReportsController::class, 'index'])
             ->name('administration.reports');
-        Route::get('/administration/reports/adjudicationbackup', [App\Http\Controllers\Administration\Reports\AdjudicationbackupController::class, 'index'])
+        Route::get('/administration/reports/adjudicationbackup/{ensemble}', [App\Http\Controllers\Administration\Reports\AdjudicationbackupController::class, 'index'])
             ->name('administration.reports.adjudicationbackup');
+        //Route::get('/administration/reports/adjudicationbackup', [App\Http\Controllers\Administration\Reports\AdjudicationbackupController::class, 'index'])
+        //    ->name('administration.reports.adjudicationbackup');
 
         Route::get('/administration/reports/participants', [App\Http\Controllers\Administration\Reports\CsvParticipantsController::class, 'index'])
             ->name('administration.reports.participants');

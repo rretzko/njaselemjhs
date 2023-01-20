@@ -58,7 +58,7 @@ class Adjudicator extends Model
                 ($scores[3] + $scores[4] + $scores[5]), //Solo Total
                 array_sum($scores), //All Scores Total
               ]
-            : [0,0,0,0,0,0,0,0,0];
+            : ['','','','','','','','',''];
     }
 
     /**
