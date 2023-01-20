@@ -23,11 +23,14 @@ class AdjudicationbackupController extends Controller
 
         $students = Student::where('event_id', $event->id)
             ->where('ensemble_id', $ensemble->id)
+            ->orderBy('voicepart_id')
             ->orderBy('last')
             ->get();
 
+        $voicePartId = $students->first()->voicepart->id;
+
         $pdf = PDF::loadView('pdfs.adjudicationbackup',
-            compact('students'))
+            compact('students','voicePartId'))
             ->setPaper('letter','portrait');
 
         $fileName = 'adjudicationBackup_'.ucwords($ensemble->abbr).'_'.date('ynd_Gis').'.pdf';

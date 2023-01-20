@@ -4,7 +4,7 @@
     td,th{border: 1px solid black;}
 </style>
 @foreach($students AS $studentKey => $student)
-
+        @if($student->voicepart->id !== $voicePartId) {{ $voicePartId = $student->voicepart->id }}<div class="page_break"></div> @endif
         <div id="page" class=" @if(! ($loop->iteration % 3)) page_break @endif " >
 
                 <header style="font-size: 1.5rem; margin-bottom: 1rem;">

@@ -33,11 +33,13 @@
                             </li>
                         </ol>
                     </li>
+
                     <li>
                         <a href="{{ route('administration.reports.scores') }}" class="text-indigo-500">
                             Scores pdfs
                         </a>
                     </li>
+
                     <li>
                         <a href="{{ route('administration.reports.participants') }}" class="text-indigo-500">
                             Participant csv files
