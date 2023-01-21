@@ -27,7 +27,7 @@ class Student extends Model
 
     public function calcFinalScore()
     {
-        $fullset = 15;
+        $fullset = 18;
         $finalscore = new FinalScore;
 
         //add or update row if a full set of scores is available

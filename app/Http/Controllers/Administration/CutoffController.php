@@ -9,6 +9,7 @@ use App\Http\Requests\UpdateCutoffRequest;
 use App\Models\Ensemble;
 use App\Models\Event;
 use App\Models\Participant;
+use App\Models\Student;
 use App\Models\Voicepart;
 
 class CutoffController extends Controller
@@ -112,5 +113,23 @@ class CutoffController extends Controller
     public function destroy(Cutoff $cutoff)
     {
         //
+    }
+
+    /**
+     * Workaround to break-down in final-score preparation
+     */
+    public function finalScores()
+    {
+        $students = Student::where('event_id', Event::currentEvent()->first()->id)->get();
+
+        foreach($students AS $student){
+
+            $student->calcFinalScore();
+        }
+
+        $lastUpdate = 'Last Update: '.date('M d, Y g:i:s a').', '.$students->count().' students';
+        session()->flash('finalScoreDate', $lastUpdate);
+
+        return back();
     }
 }

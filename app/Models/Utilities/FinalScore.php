@@ -83,5 +83,6 @@ class FinalScore extends Model
                 'score' => $score,
             ]
         );
+
     }
 }

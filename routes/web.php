@@ -38,6 +38,8 @@ Route::group(['middleware' => 'auth'],
         /** CUT-OFFS **/
         Route::get('/administration/cutoffs', [App\Http\Controllers\Administration\CutoffController::class, 'index'])
             ->name('administration.cutoffs');
+        Route::get('/administration/cutoffs/finalscores', [App\Http\Controllers\Administration\CutoffController::class, 'finalScores'])
+            ->name('administration.cutoffs.finalscores');
         Route::get('/administration/cutoffs/{event}', [App\Http\Controllers\Administration\CutoffController::class, 'show'])
             ->name('administration.cutoffs.show');
         Route::get('/administration/cutoffs/{event}/{ensemble}', [App\Http\Controllers\Administration\CutoffensembleController::class, 'show'])

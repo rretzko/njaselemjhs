@@ -34,6 +34,12 @@
                                 </div>
                                 <div id="form_and_table" class="w-full">
                                     <ul class="list-disc ml-12">
+                                        <li>
+                                            <a href="{{ route('administration.cutoffs.finalscores') }}" class="text-indigo-500">
+                                                Update final scores
+                                            </a>
+                                            <span class="text-xs"> @if(session('finalScoreDate')) ({{ session('finalScoreDate') }}) @endif</span>
+                                        </li>
                                         @foreach($event->ensembles AS $ensemble)
                                             <li>
                                                 <a href="{{ route('administration.cutoffs.ensemble.show',
