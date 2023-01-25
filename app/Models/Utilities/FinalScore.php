@@ -3,6 +3,7 @@
 namespace App\Models\Utilities;
 
 use App\Models\Adjudicator;
+use App\Models\Cutoff;
 use App\Models\Event;
 use App\Models\Participant;
 use App\Models\Score;
@@ -17,6 +18,17 @@ class FinalScore extends Model
     use HasFactory;
 
     protected $fillable = ['ensemble_id','event_id','score', 'student_id', 'voicepart_id'];
+
+    public function getIsAcceptedAttribute(): bool
+    {
+        $cutoff = Cutoff::where('event_id', $this->event_id)
+            ->where('ensemble_id', $this->ensemble_id)
+            ->where('voicepart_id', $this->student->voicepart_id)
+            ->first()
+            ->score ?? 0;
+
+        return $this->score <= $cutoff;
+    }
 
     public function getIsParticipantAttribute()
     {

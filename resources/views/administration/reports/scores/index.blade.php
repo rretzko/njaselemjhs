@@ -27,15 +27,32 @@
                         <div>
                             <header class="font-bold">{{ $event->short_name}}</header>
                             <ul class="ml-12 text-lg list-disc">
-                                @foreach($ensembles AS $ensemble)
-                                    <li>
-                                        <a href="{{ route('administration.reports.scores.ensemble',['event' => $event, 'ensemble' => $ensemble]) }}"
-                                            class="text-indigo-500"
-                                        >
-                                            {{ $ensemble->name }}
-                                        </a>
-                                    </li>
-                                @endforeach
+                                <li>CSVs
+                                    <ul class="ml-6">
+                                        @foreach($ensembles AS $ensemble)
+                                            <li>
+                                                <a href="{{ route('administration.reports.scores.csv.ensemble',['event' => $event, 'ensemble' => $ensemble]) }}"
+                                                    class="text-indigo-500"
+                                                >
+                                                    {{ $ensemble->name }}
+                                                </a>
+                                            </li>
+                                        @endforeach
+                                    </ul>
+                                </li>
+                                <li>PDFs
+                                    <ul class="ml-6">
+                                        @foreach($ensembles AS $ensemble)
+                                            <li>
+                                                <a href="{{ route('administration.reports.scores.ensemble',['event' => $event, 'ensemble' => $ensemble]) }}"
+                                                   class="text-indigo-500"
+                                                >
+                                                    {{ $ensemble->name }}
+                                                </a>
+                                            </li>
+                                        @endforeach
+                                    </ul>
+                                </li>
                             </ul>
                         </div>
                     @endif

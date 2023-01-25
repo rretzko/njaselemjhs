@@ -141,12 +141,15 @@ Route::group(['middleware' => 'auth'],
             ->name('administration.reports.participants.ensemble');
         Route::get('participants/export/', [\App\Http\Controllers\Administration\Reports\CsvParticipantsController::class, 'export']);
 
-       //Route::get('/administration/reports/scores/{ensemble}', [App\Http\Controllers\Administration\Reports\PdfscoresController::class, 'index'])
-        //    ->name('administration.reports.scores');
+        /** SCORES PDFs */
         Route::get('/administration/reports/scores', [App\Http\Controllers\Administration\Reports\PdfscoresController::class, 'index'])
             ->name('administration.reports.scores');
         Route::get('/administration/reports/scores/ensemble/{event}/{ensemble}', [App\Http\Controllers\Administration\Reports\PdfscoresController::class, 'download'])
             ->name('administration.reports.scores.ensemble');
+
+        /** SCORES CSVs */
+        Route::get('/administration/reports/scores/csv/ensemble/{event}/{ensemble}', [App\Http\Controllers\Administration\Reports\CsvscoresController::class, 'export'])
+            ->name('administration.reports.scores.csv.ensemble');
 
         /** STUDENTS **/
         Route::get('/administration/students/{director}', [App\Http\Controllers\Administration\StudentController::class, 'index'])

@@ -57,14 +57,14 @@
         </thead>
         <tbody>
             @foreach($finalscores->where('voicepart_id', $voicepart->id) AS $finalscore)
-                <tr style="{{ $finalscore->isParticipant ? '' : 'background-color: rgba(0,0,0,.1);' }}" >
+                <tr style="{{ $finalscore->isAccepted ? '' : 'background-color: rgba(0,0,0,.1);' }}" >
                     <td style="text-align: left;">{{ $finalscore->student->fullnameAlpha }}</td>
                     <td>{{ $finalscore->voicepartAbbr }}</td>
                     @foreach($finalscore->studentScores AS $score)
                         <td style=" @if(! ($loop->iteration % 3)) border-right: 3px solid black; @endif " >{{ $score }}</td>
                     @endforeach
                     <td>{{ (int)$finalscore->score }}</td>
-                    <td>{{ $finalscore->isParticipant ? 'acc' : 'n/a' }}</td>
+                    <td>{{ $finalscore->isAccepted ? 'acc' : 'n/a' }}</td>
                 </tr>
             @endforeach
         </tbody>
