@@ -30,7 +30,6 @@ class PdfscoresController extends Controller
             ->orderBy('score')
             ->get();
 
-
         $pdf = PDF::loadView('administration.reports.scores.pdf',
             compact('ensemble', 'event', 'finalscores'))->setPaper('letter','portrait');
 

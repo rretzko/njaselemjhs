@@ -2,8 +2,10 @@
 
 namespace App\Models\Utilities;
 
+use App\Models\Adjudicator;
 use App\Models\Event;
 use App\Models\Participant;
+use App\Models\Score;
 use App\Models\Student;
 use App\Models\Voicepart;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -34,10 +36,31 @@ class FinalScore extends Model
 
     /**
      * Return array of scores sorted by adjudicator_id + scoredefinition->order_by
+     * Replace averaged scores with dashes when student's teacher is also student's adjudicator
      * @return void
      */
     public function getStudentScoresAttribute() : array
     {
+        /**
+         * @since 25-Jan-23
+         */
+        $eventId = Event::currentEvent()->first()->id;
+        $teacherId = Student::find($this->student_id)->user_id;
+        $adjudicator = Adjudicator::where('user_id', $teacherId)->where('event_id', $eventId)->first();
+        $adjudicatorId = ($adjudicator) ? $adjudicator->id : 0;
+        $score = new Score;
+        foreach($score->studentScores(Event::currentEvent()->first()->id, $this->student_id) AS $studentScore){
+            $studentScores[] = ($studentScore->adjudicator_id == $adjudicatorId)
+                ? '-'
+                : $studentScore->score;
+        }
+
+        return $studentScores ?: [0,0,0,0,0,0,0];
+
+        /**
+         * @since 21-Jan-23
+         */
+        /*
         $scores = DB::table('scores')
             ->join('scoredefinitions', 'scores.scoredefinition_id','=','scoredefinitions.id')
             ->where('scores.student_id', $this->student_id)
@@ -47,7 +70,12 @@ class FinalScore extends Model
             ->pluck('scores.score')
             ->toArray();
 
-        return $scores ?: [0,0,0,0,0,0,0];
+        return $scores;
+        */
+
+        /**
+         * @since 2021-22
+         */
         /*
         return Student::find($this->student_id)->scores
             ->sortBy('adjudicator_id')
