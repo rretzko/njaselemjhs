@@ -14,14 +14,14 @@
     <table class="page_break">
         <thead>
             <tr>
-                <th colspan="2" style="border: 0;"></th>
+                <th colspan="3" style="border: 0;"></th>
                 <th colspan="6" style="border-right: 3px solid black;" >Judge 1</th>
                 <th colspan="6" style="border-right: 3px solid black;" >Judge 2</th>
                 <th colspan="6" style="border-right: 3px solid black;" >Judge 3</th>
                 <th colspan="2" style="border: 0;"></th>
             </tr>
             <tr>
-                <th colspan="2" style="border: 0;"></th>
+                <th colspan="3" style="border: 0;"></th>
                 <th colspan="3" style="border-right: 3px solid black;" >Vocalise</th>
                 <th colspan="3" style="border-right: 3px solid black;" >Solo</th>
                 <th colspan="3" style="border-right: 3px solid black;" >Vocalise</th>
@@ -32,6 +32,7 @@
             </tr>
             <tr>
                 <th>Student</th>
+                <th>Director</th>
                 <th>VP</th>
                 <th>Q</th>
                 <th>I</th>
@@ -59,6 +60,7 @@
             @foreach($finalscores->where('voicepart_id', $voicepart->id) AS $finalscore)
                 <tr style="{{ $finalscore->isAccepted ? '' : 'background-color: rgba(0,0,0,.1);' }}" >
                     <td style="text-align: left;">{{ $finalscore->student->fullnameAlpha }}</td>
+                    <td style="text-align: left;">{{ $finalscore->student->director->fullnameAlpha }}</td>
                     <td>{{ $finalscore->voicepartAbbr }}</td>
                     @foreach($finalscore->studentScores AS $score)
                         <td style=" @if(! ($loop->iteration % 3)) border-right: 3px solid black; @endif " >{{ $score }}</td>
