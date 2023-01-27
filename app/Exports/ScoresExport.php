@@ -36,7 +36,8 @@ class ScoresExport implements FromCollection, WithHeadings, WithMapping
     public function headings(): array
     {
         return [
-            'student_id',
+            'student',
+            'director',
             'voice_part',
             'j1-v-q',
             'j1-v-i',
@@ -68,9 +69,10 @@ class ScoresExport implements FromCollection, WithHeadings, WithMapping
     public function map($row): array
     {
         $scores = $this->scoresArray($row);
-
+        $student = Student::find($row->student_id);
         return [
-            Student::find($row->student_id)->fullnameAlpha,
+            $student->fullnameAlpha,
+            $student->director->fullnameAlpha,
             Voicepart::find($row->voicepart_id)->abbr,
             $scores[0],
             $scores[1],
